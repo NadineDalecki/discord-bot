@@ -1,0 +1,90 @@
+{
+  "Affen": {
+    "guildId": "462002956498239489",
+    "prefix": "?",
+    "df": "./dialogflow/affen.js",
+    "logChannel": "718176504437276682",
+    "guildLogs": false,
+    "deletedMessages": false,
+    "activity": {
+      "text": "the salt server 👀",
+      "url": "https://www.twitch.tv/echoarena_vrml",
+      "type": "WATCHING"
+    },
+    "rrId": "",
+    "roles": {
+      "lft": "549925842646597651",
+      "Scrimmer": "509787093208399872",
+      "Climbey": "428612225134231552"
+    },
+    "muteRole": "444875478390800406"
+  },
+
+  "Mel": {
+    "guildId": "326412222119149578",
+    "prefix": "?",
+    "df": "./dialogflow/Mel.js",
+    "logChannel": "718176504437276682",
+     "guildLogs": false,
+    "deletedMessages": false,
+    "activity": {
+      "text": "the VRML Bot 👀",
+      "url": "https://www.twitch.tv/echoarena_vrml",
+      "type": "WATCHING"
+    },
+    "rrId": "",
+    "roles": {},
+    "muteRole": "748631446217818123"
+  },
+
+  "VRL": {
+    "guildId": "439427299675209729",
+    "prefix": "?",
+    "df": "./dialogflow/vrl.js",
+    "logChannel": "566294428453699584",
+     "guildLogs": true,
+    "deletedMessages": true,
+    "activity": {
+      "text": "VR League Twitch 👀",
+      "url": "https://www.twitch.tv/vrchallenger",
+      "type": "STREAMING"
+    },
+    "rrMessageId": "679385800412233736",
+    "roles": {
+      "lft": "549925842646597651",
+      "Scrimmer": "509787093208399872",
+      "Climbey": "428612225134231552"
+    },
+    "rrRoles": {
+      "551077554543394827": {
+        "name": "Echo Arena",
+        "role": "446981661368909824"
+      },
+      "551077555218939904": {
+        "name": "Echo Combat",
+        "role": "551080412508848138"
+      },
+      "551077662798643200": {
+        "name": "Space Junkies",
+        "role": "551080564241989656"
+      },
+      "679384856551227392": {
+        "name": "Pistol Whip",
+        "role": "679365090226601994"
+      },
+      "551077555487244289": {
+        "name": "Onward",
+        "role": "462242156090753059"
+      },
+      "716705176236326923": {
+        "name": "EU",
+        "role": "446982022368329728"
+      },
+      "519923682001289217": {
+        "name": "NA",
+        "role": "446982026046865409"
+      }
+    },
+    "muteRole": ""
+  }
+}
