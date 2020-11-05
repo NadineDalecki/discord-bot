@@ -1,1 +1,1 @@
-# NadineDalecki-Discord-Bot-
+# Discord-Bot
