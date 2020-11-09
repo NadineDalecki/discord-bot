@@ -140,8 +140,7 @@ function runBot(token) {
             console.log(e);
           }
         }
-      }
-      if (!message.author.bot && message.cleanContent.length <= 256) {
+      } else if (!message.author.bot && message.cleanContent.length <= 256) {
         // MENTIONS =========================================================================================================
         if (
           (message.content.toLowerCase().includes("nada") ||
@@ -187,10 +186,10 @@ function runBot(token) {
           }
         }
       }
-      // COMMANDS =========================================================================================================
-      else if (!message.content.startsWith(set[client.user.username].prefix))
-        return;
-      functions.Command(client, message, set[client.user.username].prefix);
     }
+    // COMMANDS =========================================================================================================
+    else if (!message.content.startsWith(set[client.user.username].prefix))
+      return;
+    functions.Command(client, message, set[client.user.username].prefix);
   });
 }
