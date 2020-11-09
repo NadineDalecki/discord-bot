@@ -6,8 +6,9 @@ dependencies:
   express: 4.17.1
   google-auth-library: 6.1.3
   google-spreadsheet: 3.0.13
-  googleapis: 63.0.0
+  googleapis: 64.0.0
   node-datetime: 2.1.2
+  node-fetch: 2.6.1
 packages:
   /@discordjs/collection/0.1.6:
     dev: false
@@ -640,7 +641,7 @@ packages:
       node: '>=10.10.0'
     resolution:
       integrity: sha512-W46WKCk3QtlCCfmZyQIH5zxmDOyeV5Qj+qs7nr2ox08eRkEJMWp6iwv542R/PsokXaGUSrmif4vCC4+rGzRSsQ==
-  /googleapis/63.0.0:
+  /googleapis/64.0.0:
     dependencies:
       google-auth-library: 6.1.3
       googleapis-common: 4.4.3
@@ -648,7 +649,7 @@ packages:
     engines:
       node: '>=10'
     resolution:
-      integrity: sha512-wixBalZFz9qLFJqKcEaKRAKuWAf20qw35/vVN/0ogfhIMlGuDUNE3groAPdaqAmaE3sTLSEe8+XRNIx3lxOhcQ==
+      integrity: sha512-o8m4aRVv/LdvTVMgH4tLNeQvJZrXaa+62L9wPaKg6nHlCN3dBCKWWQKOklCwtg18xpWY4/vdNuTPHb/9Lnd00A==
   /gtoken/5.0.3:
     dependencies:
       gaxios: 3.2.0
@@ -1257,5 +1258,6 @@ specifiers:
   express: ^4.17.1
   google-auth-library: ^6.1.3
   google-spreadsheet: ^3.0.13
-  googleapis: ^63.0.0
+  googleapis: ^64.0.0
   node-datetime: ^2.1.2
+  node-fetch: ^2.6.1

@@ -28,7 +28,7 @@ module.exports = {
   },
   DeletedMessage: async function(client, message) {
     if (set[client.user.username].deletedMessages == true) {
-      const entry = await message.guild
+    /* const entry = await message.guild
         .fetchAuditLogs({ type: "MESSAGE_DELETE" })
         .then(audit => audit.entries.first());
       let user = "";
@@ -57,7 +57,7 @@ module.exports = {
           .send(embed);
       } catch (error) {
         console.log(error);
-      }
+      }*/
     }
   },
   DialogflowQuery: async function(message, key, email, id) {
@@ -145,7 +145,7 @@ module.exports = {
       )
       .setDescription(error.stack);
     console.log(error);
-    //client.users.cache.get(process.env.OWNER).send(error);
+    client.users.cache.get(process.env.OWNER).send(client.user.username + embed);
   },
   Inform: function(client, answer, message) {
     const embed = new Discord.MessageEmbed()

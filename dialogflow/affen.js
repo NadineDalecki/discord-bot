@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const functions = require("../functions.js");
+const fetch = require("node-fetch")
 
 const key = process.env.PRIVATE_KEY_AFFEN.replace(/\\n/g, "\n");
 const email = process.env.CLIENT_EMAIL_AFFEN;
@@ -57,7 +58,7 @@ module.exports = {
         const roleString = answer.intent.substring(7);
         message.guild
           .member(message.author.id)
-          .roles.remove(set["Affen"].roles[roleString].id);
+          .roles.remove(set["Affen"].roles[roleString]);
         message.reply(answer.response);
       }
     }

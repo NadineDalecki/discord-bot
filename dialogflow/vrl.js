@@ -12,8 +12,11 @@ module.exports = {
     const answer = await functions.DialogflowQuery(message, key, email, id);
 
     //=========================================================================================================
-      message.reply(answer.response);
+    if (message.channel.type == "dm"){
+    
+    message.reply(answer.response);
       functions.Inform(client, answer, message);
+    }
     //=========================================================================================================
   }
 };

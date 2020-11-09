@@ -1,6 +1,6 @@
 {
   "Affen": {
-    "guildId": "462002956498239489",
+    "guildId": "387015404092129282",
     "prefix": "?",
     "df": "./dialogflow/affen.js",
     "logChannel": "718176504437276682",
@@ -11,7 +11,10 @@
       "url": "https://www.twitch.tv/echoarena_vrml",
       "type": "WATCHING"
     },
-    "rrId": "",
+    "JoinDM": true,
+    "JoinDMText": "**Welcome to Echo Arena EU Teams! **The place to make a team, play other teams and generally advance the EU Echo Arena scene with the ultimate goal of defeating NA teams in tournaments. This is a *closed-off private space from NA players*, so don’t mention this server or talk about its contents. Keep discussions civil, don’t overly post memes or general pointless chatter. **Be respectful**, but as this is a competitive server some drama/salt/banter is expected between teams and players.\n\n**MIXED SCRIMS**\n\nMixed scrims are fun games with random players, kind of like public matches but with the same group playing each other in a private match. A mixed scrim group will keep playing for as long as they feel like it (often 1-2 hours), with players dropping out and new players joining in.\n\n**Don’t join a mixed scrim unless you can play for at least 30 minutes, don’t ask for a mixed scrim unless you can play for about an hour.**\n\nOther than that, it’s first come first served. If you want to be alerted of these mixed scrims, join the @Scrimmer role by typing: `Affen scrimmer`\n\u200b\n**TEAM SCRIMS**\n\nTeam scrims are “practice dates” where two existing teams can train against each other, usually for a duration of 1-2 hours. If you are in a team you can tag the @Teams role and ask for a specific day or time, for example: @Teams scrims 7-9 SUK (UK Time)? If  you want to play, answer and set it up in the chat. Avoid private messaging responses if possible so others know that the spot is taken.\n\n**Don’t ask for a team scrim unless you have made sure your team can actually accept it and play for at least an hour.**\n\n**Looking for teams role**: If you are looking for teams to join, assign yourself the @looking for team role by typing: `Affen looking for team`",
+    "rrRolesFunction": false,
+    "rrMessageId": "",
     "roles": {
       "lft": "549925842646597651",
       "Scrimmer": "509787093208399872",
@@ -25,16 +28,34 @@
     "prefix": "?",
     "df": "./dialogflow/Mel.js",
     "logChannel": "718176504437276682",
-     "guildLogs": false,
+    "guildLogs": false,
     "deletedMessages": false,
     "activity": {
       "text": "the VRML Bot 👀",
       "url": "https://www.twitch.tv/echoarena_vrml",
       "type": "WATCHING"
     },
-    "rrId": "",
+    "rrRolesFunction": false,
+    "rrMessageId": "",
     "roles": {},
     "muteRole": "748631446217818123"
+  },
+    "Bane": {
+    "guildId": "428667403950620679",
+    "prefix": "?",
+    "df": "./dialogflow/Bane.js",
+    "logChannel": "718176504437276682",
+    "guildLogs": false,
+    "deletedMessages": false,
+    "activity": {
+      "text": "POPULATION:ONE",
+      "url": "",
+      "type": "PLAYING"
+    },
+    "rrRolesFunction": false,
+    "rrMessageId": "",
+    "roles": {},
+    "muteRole": ""
   },
 
   "VRL": {
@@ -42,19 +63,20 @@
     "prefix": "?",
     "df": "./dialogflow/vrl.js",
     "logChannel": "566294428453699584",
-     "guildLogs": true,
+    "guildLogs": true,
     "deletedMessages": true,
     "activity": {
       "text": "VR League Twitch 👀",
       "url": "https://www.twitch.tv/vrchallenger",
       "type": "STREAMING"
     },
-    "rrMessageId": "679385800412233736",
     "roles": {
       "lft": "549925842646597651",
       "Scrimmer": "509787093208399872",
       "Climbey": "428612225134231552"
     },
+    "rrRolesFunction": true,
+    "rrMessageId": "679385800412233736",
     "rrRoles": {
       "551077554543394827": {
         "name": "Echo Arena",
@@ -83,6 +105,28 @@
       "519923682001289217": {
         "name": "NA",
         "role": "446982026046865409"
+      }
+    },
+    "muteRole": ""
+  },
+  "Itsy": {
+    "guildId": "610545116494430234",
+    "prefix": "!",
+    "df": "./dialogflow/itsy.js",
+    "logChannel": "744152267912904735",
+    "guildLogs": false,
+    "deletedMessages": false,
+    "activity": {
+      "text": "All of you 👀",
+      "url": "https://www.twitch.tv/",
+      "type": "WATCHING"
+    },
+    "rrRolesFunction": true,
+    "rrMessageId": "746320798473781338",
+    "rrRoles": {
+      "744177070162182275": {
+        "name": "Bagel",
+        "role": "744164865840513094"
       }
     },
     "muteRole": ""

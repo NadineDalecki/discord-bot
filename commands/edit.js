@@ -11,5 +11,5 @@ module.exports = {
   }
 }
 
-const embed = new Discord.MessageEmbed()
+
 
