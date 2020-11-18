@@ -1,15 +1,13 @@
-const Discord = require("discord.js");
-const functions = require("../functions.js");
-const fetch = require("node-fetch")
-
-const key = process.env.PRIVATE_KEY_AFFEN.replace(/\\n/g, "\n");
-const email = process.env.CLIENT_EMAIL_AFFEN;
-const id = process.env.PROJECT_ID_AFFEN;
-
-const set = require("../info/settings.json")
-
 module.exports = {
-  Function: async function(client, message) {
+  name: "Affen",
+  execute: async function(client, message, set) {
+    const Discord = require("discord.js");
+    const functions = require("../functions.js");
+    const fetch = require("node-fetch");
+
+    const key = process.env.PRIVATE_KEY_AFFEN.replace(/\\n/g, "\n");
+    const email = process.env.CLIENT_EMAIL_AFFEN;
+    const id = process.env.PROJECT_ID_AFFEN;
     const answer = await functions.DialogflowQuery(message, key, email, id);
 
     //=========================================================================================================
@@ -43,24 +41,18 @@ module.exports = {
     }
     //=========================================================================================================
     else if (set["Affen"].roles[answer.intent]) {
-      if (message.channel.type == "dm") {
-        message.reply("Yeah uhm no. That doesn't work in a dm!");
-      } else {
-        message.guild
-          .member(message.author.id)
-          .roles.add(set["Affen"].roles[answer.intent]);
-        message.reply(answer.response);
-      }
+      client.guilds.cache
+        .get("387015404092129282")
+        .member(message.author.id)
+        .roles.add(set["Affen"].roles[answer.intent]);
+      message.reply(answer.response);
     } else if (answer.intent.substring(0, 6) === "remove") {
-      if (message.channel.type == "dm") {
-        message.reply("Yeah uhm no. That doesn't work in a dm!");
-      } else {
-        const roleString = answer.intent.substring(7);
-        message.guild
-          .member(message.author.id)
-          .roles.remove(set["Affen"].roles[roleString]);
-        message.reply(answer.response);
-      }
+      const roleString = answer.intent.substring(7);
+      client.guilds.cache
+        .get("387015404092129282")
+        .member(message.author.id)
+        .roles.remove(set["Affen"].roles[roleString]);
+      message.reply(answer.response);
     }
     //=========================================================================================================
     else if (answer.intent === "Spam | Spoon") {

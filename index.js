@@ -10,17 +10,13 @@ const BotTokens = [
   process.env.BOT_AFFEN,
   process.env.BOT_VRL,
   process.env.BOT_ITSY,
-  process.env.BOT_BANE
+  process.env.BOT_BANE,
+  process.env.BOT_MO
 ];
 const set = require("./info/settings.json");
 const userMap = new Map();
 const functions = require("./functions.js");
 const Discord = require("discord.js");
-const df_mel = require("./dialogflow/mel.js");
-const df_affen = require("./dialogflow/affen.js");
-const df_vrl = require("./dialogflow/vrl.js");
-const df_itsy = require("./dialogflow/itsy.js");
-const df_bane = require("./dialogflow/bane.js");
 
 process.on("error", error => console.log(error));
 process.on("uncaughtException", error => console.log(error));
@@ -39,7 +35,9 @@ function runBot(token) {
 
   client.on("error", error => functions.Error(client, error));
   client.on("messageDelete", async message => {
-    functions.DeletedMessage(client, message);
+    if (set[client.user.username].deletedMessages == true) {
+      functions.DeletedMessage(client, message);
+    }
   });
 
   client.on("guildMemberAdd", guildMember => {
@@ -83,7 +81,10 @@ function runBot(token) {
   });
 
   client.on("messageReactionAdd", async (reaction, user) => {
-    if (set[client.user.username].rrRolesFunction == true) {
+    if (
+      set[client.user.username].rrRolesFunction == true &&
+      reaction.message.id == set[client.user.username].rrMessageId
+    ) {
       functions.RoleAdd(
         client,
         reaction,
@@ -93,7 +94,10 @@ function runBot(token) {
     }
   });
   client.on("messageReactionRemove", async (reaction, user) => {
-    if (set[client.user.username].rrRolesFunction == true) {
+    if (
+      set[client.user.username].rrRolesFunction == true &&
+      reaction.message.id == set[client.user.username].rrMessageId
+    ) {
       functions.RoleRemove(
         client,
         reaction,
@@ -104,43 +108,25 @@ function runBot(token) {
   });
 
   client.once("ready", () => {
-    client.user.setActivity(set[client.user.username].activity.text, {
-      url: set[client.user.username].activity.url,
-      type: set[client.user.username].activity.type
+    client.user.setPresence({
+      status: set[client.user.username].status,
+      activity: {
+        name: set[client.user.username].activity.name,
+        url: set[client.user.username].activity.url,
+        type: set[client.user.username].activity.type
+      }
     });
     console.log(client.user.username + " Ready!");
   });
 
   client.login(token);
   // END =========================================================================================================
-
-  const GravityWatchChannels = [
-    "630095256964300801",
-    "630095400811888650",
-    "630095256964300801",
-    "630095221149138965"
-  ];
-
   client.on("message", async message => {
-    if (
-      client.user.id != message.author.id &&
-      !message.content.startsWith(set[client.user.username].prefix)
-    ) {
-      // TG REPOST =========================================================================================================
-      if (client.user.username === "Mel") {
-        if (
-          GravityWatchChannels.includes(message.channel.id) &&
-          message.author.bot &&
-          message.content.includes("Team Gravity") &&
-          !message.content.includes("scores")
-        ) {
-          try {
-            client.channels.cache.get("743091749282381845").send(message);
-          } catch (e) {
-            console.log(e);
-          }
-        }
-      } else if (!message.author.bot && message.cleanContent.length <= 256) {
+    if (client.user.id != message.author.id) {
+      // COMMANDS =========================================================================================================
+      if (message.content.startsWith(set[client.user.username].prefix)) {
+        functions.Command(client, message, set[client.user.username].prefix);
+      } else {
         // MENTIONS =========================================================================================================
         if (
           (message.content.toLowerCase().includes("nada") ||
@@ -174,22 +160,12 @@ function runBot(token) {
               userMap,
               set[client.user.username].muteRole
             );
-            df_mel.Function(client, message);
-          } else if (client.user.username === "Affen") {
-            df_affen.Function(client, message);
-          } else if (client.user.username === "Bane") {
-            df_bane.Function(client, message);
-          } else if (client.user.username === "Itsy") {
-            df_itsy.Function(client, message);
-          } else if (client.user.username === "VRL") {
-            df_vrl.Function(client, message);
+            functions.DialogflowIntents(client, message, set);
+          } else {
+            functions.DialogflowIntents(client, message, set);
           }
         }
       }
     }
-    // COMMANDS =========================================================================================================
-    else if (!message.content.startsWith(set[client.user.username].prefix))
-      return;
-    functions.Command(client, message, set[client.user.username].prefix);
   });
 }

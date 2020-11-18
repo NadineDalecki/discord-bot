@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const set = require("../info/settings.json");
 
 const welcome = new Discord.MessageEmbed()
 .setColor('#ff0000')
@@ -18,10 +19,11 @@ const welcome = new Discord.MessageEmbed()
 
 module.exports = {
   name: 'welcome',
-  execute(message, client) {
+  execute(client, message, args) {
     message.delete().catch(_ => { });
       if (client.user.username === "VRL") {
-    if (message.member.roles.cache.has("447791613926834176")) {
+        console.log(message.member.roles.cache)
+    if (message.member.roles.cache.includes(set[client.user.username].adminRoles)) {   //arr1.some(r=> arr2.includes(r)
       try
       {
         message.channel.send(welcome).then(async msg => {

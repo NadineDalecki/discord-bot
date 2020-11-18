@@ -2,7 +2,7 @@
 module.exports = {
   name: "rl",
   execute(client, message, args) {
-   
+   message.delete().catch(_ => {});
       const names = message.guild.roles.cache
         .get(args.toString())
         .members.map(m => m.user.tag.replace(/_/g, "\\_"));

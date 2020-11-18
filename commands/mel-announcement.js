@@ -11,7 +11,7 @@ module.exports = {
         message.member.hasPermission("ADMINISTRATOR")
       ) {
         const data = await functions.SpreadsheetGET(
-          "1b-2t41LO_U5j8gJfxPS_rdg4Y8kINwMgSqUKpNdf4RE",
+          "1b-2t41LO_U5j8gJfxPS_rdg4Y8kINwMgSqUKpNdf4RE", 0,
           process.env.CLIENT_EMAIL_MEL,
           process.env.PRIVATE_KEY_MEL.replace(/\\n/g, "\n")
         );
