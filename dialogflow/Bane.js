@@ -29,8 +29,8 @@ module.exports = {
         //=========================================================================================================
         if (answer.intent === "Tip") {
           const data = await functions.SpreadsheetGET(
-            "1uokUp6aljOEhCEFPzHRzAJPJW4aVf-FvPJJrRSosS70",
-            0,
+            "1EUd3czTty60S7WhFn9Y5leOtH0lOu2LhLEvkQ62eE50",
+            2,
             email,
             key
           );
