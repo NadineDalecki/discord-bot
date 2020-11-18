@@ -6,6 +6,23 @@ const { google } = require("googleapis");
 const set = require("./info/settings.json");
 
 module.exports = {
+  DialogflowIntents: function(client, message, set) {
+    client.dialogues = new Discord.Collection();
+    const dialogflowFiles = fs
+      .readdirSync("./dialogflow")
+      .filter(file => file.endsWith(".js"));
+    for (const file of dialogflowFiles) {
+      const dialog = require(`./dialogflow/${file}`);
+      client.dialogues.set(dialog.name, dialog);
+    }
+
+    if (!client.dialogues.has(client.user.username)) return;
+    try {
+      client.dialogues.get(client.user.username).execute(client, message, set);
+    } catch (error) {
+      console.error(error);
+    }
+  },
   Command: function(client, message, Prefix) {
     client.commands = new Discord.Collection();
     const commandFiles = fs
@@ -20,44 +37,42 @@ module.exports = {
     if (!client.commands.has(command)) return;
     try {
       if (command !== "") {
-        client.commands.get(command).execute(client, message, args);
+        client.commands.get(command).execute(client, message, args, set);
       }
     } catch (error) {
       console.error(error);
     }
   },
   DeletedMessage: async function(client, message) {
-    if (set[client.user.username].deletedMessages == true) {
-      const entry = await message.guild
-        .fetchAuditLogs({ type: "MESSAGE_DELETE" })
-        .then(audit => audit.entries.first());
-      let user = "";
-      try {
-        if (
-          entry.extra.channel.id === message.channel.id &&
-          entry.target.id === message.author.id &&
-          entry.createdTimestamp > Date.now() - 5000 &&
-          entry.extra.count >= 1
-        ) {
-          user = entry.executor.username;
-        } else {
-          user = message.author.username;
-        }
-
-        const embed = new Discord.MessageEmbed()
-          .setColor("#c20000")
-          .setAuthor(
-            `${user} deleted a message from ${message.author.username} in #${message.channel.name}`,
-            user.displayAvatarURL
-          )
-          .setDescription(`${message.content}`);
-
-        client.channels.cache
-          .get(set[client.user.username].logChannel)
-          .send(embed);
-      } catch (error) {
-        console.log(error);
+    const entry = await message.guild
+      .fetchAuditLogs({ type: "MESSAGE_DELETE" })
+      .then(audit => audit.entries.first());
+    let user = "";
+    try {
+      if (
+        entry.extra.channel.id === message.channel.id &&
+        entry.target.id === message.author.id &&
+        entry.createdTimestamp > Date.now() - 5000 &&
+        entry.extra.count >= 1
+      ) {
+        user = entry.executor.username;
+      } else {
+        user = message.author.username;
       }
+
+      const embed = new Discord.MessageEmbed()
+        .setColor("#c20000")
+        .setAuthor(
+          `${user} deleted a message from ${message.author.username} in #${message.channel.name}`,
+          user.displayAvatarURL
+        )
+        .setDescription(`${message.content}`);
+
+      client.channels.cache
+        .get(set[client.user.username].logChannel)
+        .send(embed);
+    } catch (error) {
+      console.log(error);
     }
   },
   DialogflowQuery: async function(message, key, email, id) {
@@ -145,19 +160,17 @@ module.exports = {
       )
       .setDescription(error.stack);
     console.log(error);
-    //client.users.cache.get(process.env.OWNER).send(error);
+    client.users.cache
+      .get(process.env.OWNER)
+      .send(client.user.username + embed);
   },
   Inform: function(client, answer, message) {
     const embed = new Discord.MessageEmbed()
       .setColor("#ff930f")
-      .setAuthor(
-        `${message.author.tag} in ${message.channel.name}`,
-        message.author.displayAvatarURL()
-      )
       .setDescription(
         `[${message}](${message.url})\n**Bot:** ${answer.response}`
       );
-    client.users.cache.get(process.env.OWNER).send(embed);
+    client.channels.cache.get(process.env.LOG).send(embed);
   },
   Mention: function(client, message, id) {
     const embed = new Discord.MessageEmbed()
@@ -245,7 +258,7 @@ module.exports = {
       }
     }
   },
-  SpreadsheetGET: async function(sheet_id, email, key) {
+  SpreadsheetGET: async function(sheet_id, tab, email, key) {
     const doc = new GoogleSpreadsheet(sheet_id);
     await doc.useServiceAccountAuth({
       client_email: email,
@@ -253,11 +266,11 @@ module.exports = {
     });
 
     await doc.loadInfo();
-    const sheet = doc.sheetsByIndex[0];
+    const sheet = doc.sheetsByIndex[tab];
     const rows = await sheet.getRows();
-    return { sheet, rows };
+    return { doc, sheet, rows };
   },
-  SpreadsheetPOST: async function(sheet_id, email, key, rowData) {
+  SpreadsheetPOST: async function(sheet_id, tab, email, key, rowData) {
     const doc = new GoogleSpreadsheet(sheet_id);
     await doc.useServiceAccountAuth({
       client_email: email,
@@ -265,7 +278,7 @@ module.exports = {
     });
 
     await doc.loadInfo();
-    const sheet = doc.sheetsByIndex[0];
+    const sheet = doc.sheetsByIndex[tab];
     const moreRows = await sheet.addRows(rowData);
   }
 };

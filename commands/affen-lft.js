@@ -1,15 +1,21 @@
 module.exports = {
   name: "lft",
   execute(client, message, args) {
-    if (client.user.username === "Affen"){
-    const names = message.guild.roles.cache
-      .get("549925842646597651")
-      .members.map(m => m.user.tag.replace(/_/g, "\\_"));
-    if (names === "") {
-      message.channel.send("Nah. No motivation. Bother someone else.");
-    } else {
-      message.channel.send(names);
+    if (client.user.username === "Affen") {
+      const names = client.guilds.cache.get("387015404092129282").roles.cache
+        .get("549925842646597651")
+        .members.map(m => m.user.tag.replace(/_/g, "\\_"));
+      if (names === "") {
+        message.channel.send("Nah. No motivation. Bother someone else.");
+      } else {
+        if(message.channel.type == "dm"){
+          message.author.send(names);
+        }
+        else {
+          message.author.send(names);
+          message.react("💌")
+        }
+      }
     }
-  }
   }
 };
