@@ -11,9 +11,11 @@ const BotTokens = [
   process.env.BOT_VRL,
   process.env.BOT_ITSY,
   process.env.BOT_BANE,
-  process.env.BOT_MO
+  process.env.BOT_MO,
+  process.env.BOT_KVN,
+  process.env.BOT_TG
 ];
-const set = require("./info/settings.json");
+const set = require("./settings.json");
 const userMap = new Map();
 const functions = require("./functions.js");
 const Discord = require("discord.js");
@@ -82,8 +84,7 @@ function runBot(token) {
 
   client.on("messageReactionAdd", async (reaction, user) => {
     if (
-      set[client.user.username].rrRolesFunction == true &&
-      reaction.message.id == set[client.user.username].rrMessageId
+      set[client.user.username].rrRolesFunction == true 
     ) {
       functions.RoleAdd(
         client,
@@ -95,8 +96,7 @@ function runBot(token) {
   });
   client.on("messageReactionRemove", async (reaction, user) => {
     if (
-      set[client.user.username].rrRolesFunction == true &&
-      reaction.message.id == set[client.user.username].rrMessageId
+      set[client.user.username].rrRolesFunction == true 
     ) {
       functions.RoleRemove(
         client,

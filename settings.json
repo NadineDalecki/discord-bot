@@ -28,7 +28,9 @@
     "spreadsheetID": "1b-2t41LO_U5j8gJfxPS_rdg4Y8kINwMgSqUKpNdf4RE",
     "guildId": "326412222119149578",
     "prefix": "?",
-    "adminRoles": ["151759779016998913, 702591687096270848, 425225020382642176"],
+    "adminRoles": [
+      "151759779016998913, 702591687096270848, 425225020382642176"
+    ],
     "logChannel": "718176504437276682",
     "guildLogs": false,
     "deletedMessages": false,
@@ -62,7 +64,29 @@
     "roles": {},
     "muteRole": ""
   },
-
+  "Itsy": {
+    "guildId": "610545116494430234",
+    "prefix": "?",
+    "df": "./dialogflow/itsy.js",
+    "logChannel": "744152267912904735",
+    "guildLogs": false,
+    "deletedMessages": false,
+    "status": "online",
+    "activity": {
+      "name": "to your ideas 💡",
+      "type": "LISTENING",
+      "url": "https://www.twitch.tv/"
+    },
+    "rrRolesFunction": true,
+    "rrMessageId": "746320798473781338",
+    "rrRoles": {
+      "744177070162182275": {
+        "name": "Bagel",
+        "role": "744164865840513094"
+      }
+    },
+    "muteRole": ""
+  },
   "VRL": {
     "guildId": "439427299675209729",
     "prefix": "?",
@@ -115,29 +139,7 @@
     },
     "muteRole": ""
   },
-  "Itsy": {
-    "guildId": "610545116494430234",
-    "prefix": "!",
-    "df": "./dialogflow/itsy.js",
-    "logChannel": "744152267912904735",
-    "guildLogs": false,
-    "deletedMessages": false,
-    "status": "online",
-    "activity": {
-      "name": "to your ideas 💡",
-      "type": "LISTENING",
-      "url": "https://www.twitch.tv/"
-    },
-    "rrRolesFunction": true,
-    "rrMessageId": "746320798473781338",
-    "rrRoles": {
-      "744177070162182275": {
-        "name": "Bagel",
-        "role": "744164865840513094"
-      }
-    },
-    "muteRole": ""
-  },
+
   "Mo": {
     "guildId": "424911215714631690",
     "prefix": "!",
@@ -165,17 +167,14 @@
     "deletedMessages": false,
     "status": "online",
     "activity": {
-      "name": "to the alpha testers",
-      "type": "LISTENING",
-      "url": ""
+      "name": "the alpha testers",
+      "type": "WATCHING",
+      "url": "https://www.twitch.tv/"
     },
-    "rrRolesFunction": false,
+    "rrRolesFunction": true,
+    "rrAuto": "724966510614937622",
     "rrMessageId": "742300225133346896",
-    "roles": {
-      "725333357902299176": {
-        "name": "Audience",
-        "role": "724966510614937622"
-      },
+    "rrRoles": {
       "725396079289303050": {
         "name": "EU",
         "role": "725059685417484430"
@@ -183,6 +182,54 @@
       "725336757133901924": {
         "name": "NA",
         "role": "725059639397580823"
+      },
+      "725396078832123958": {
+        "name": "Asia",
+        "role": "725059833107054602"
+      }
+    },
+    "muteRole": ""
+  },
+  "TG Bot": {
+    "guildId": "421618914166833152",
+    "prefix": "!",
+    "adminRoles": ["647068080908009472, 421641048155226113"],
+    "logChannel": "718176504437276682",
+    "guildLogs": false,
+    "deletedMessages": false,
+    "status": "online",
+    "activity": {
+      "name": "in Zero Gravity",
+      "type": "COMPETING",
+      "url": "https://www.twitch.tv/"
+    },
+    "rrRolesFunction": true,
+    "rrAuto": "651255027469516801",
+    "rrMessageId": "749599176853028884",
+    "rrRoles": {
+      "748466627942809710": {
+        "name": "Echo Arena",
+        "role": "748518111086379029"
+      },
+      "748466627854729276": {
+        "name": "Echo Combat",
+        "role": "748518167105634368"
+      },
+      "748467374105165826": {
+        "name": "Tower Tag",
+        "role": "748518189868122142"
+      },
+      "748466702244642926": {
+        "name": "Beat Saber",
+        "role": "748518215520485407"
+      },
+      "748466627527442473": {
+        "name": "Pistol Whip",
+        "role": "748518241911177307"
+      },
+      "744481770296311848": {
+        "name": "Gravity",
+        "role": "651255027469516801"
       }
     },
     "muteRole": ""

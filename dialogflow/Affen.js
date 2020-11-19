@@ -4,7 +4,6 @@ module.exports = {
     const Discord = require("discord.js");
     const functions = require("../functions.js");
     const fetch = require("node-fetch");
-
     const key = process.env.PRIVATE_KEY_AFFEN.replace(/\\n/g, "\n");
     const email = process.env.CLIENT_EMAIL_AFFEN;
     const id = process.env.PROJECT_ID_AFFEN;

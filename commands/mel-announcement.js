@@ -3,7 +3,7 @@ const functions = require("../functions.js");
 module.exports = {
   name: "a",
   async execute(client, message, args) {
-    //message.delete().catch(_ => {});
+    message.delete().catch(_ => {});
     if (client.user.username === "Mel") {
       if (
         message.member.roles.cache.has("326414022884982784") || //admin

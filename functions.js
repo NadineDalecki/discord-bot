@@ -3,7 +3,7 @@ const dialogflow = require("@google-cloud/dialogflow");
 const fs = require("fs");
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const { google } = require("googleapis");
-const set = require("./info/settings.json");
+const set = require("./settings.json");
 
 module.exports = {
   DialogflowIntents: function(client, message, set) {
@@ -200,6 +200,9 @@ module.exports = {
           .member(user)
           .roles.add(set[client.user.username].rrRoles[emojiId].role);
       }
+    }
+   if (set[client.user.username].rrAuto) {
+      reaction.message.guild.member(user).roles.add(set[client.user.username].rrAuto)
     }
   },
   RoleRemove: async function(client, reaction, user, id) {
