@@ -36,7 +36,7 @@ function runBot(token) {
   client.on("error", error => functions.Error(client, error));
   client.on("messageDelete", async message => {
     if (set[client.user.username].deletedMessages == true) {
-      functions.DeletedMessage(client, message);
+     // functions.DeletedMessage(client, message);
     }
   });
 
@@ -125,7 +125,7 @@ function runBot(token) {
     if (client.user.id != message.author.id) {
       // COMMANDS =========================================================================================================
       if (message.content.startsWith(set[client.user.username].prefix)) {
-        functions.Command(client, message, set[client.user.username].prefix);
+        functions.Command(client, message, set[client.user.username].prefix, set);
       } else {
         // MENTIONS =========================================================================================================
         if (

@@ -23,7 +23,7 @@ module.exports = {
       console.error(error);
     }
   },
-  Command: function(client, message, Prefix) {
+  Command: function(client, message, Prefix, set) {
     client.commands = new Discord.Collection();
     const commandFiles = fs
       .readdirSync("./commands")
@@ -159,7 +159,6 @@ module.exports = {
         "https://cdn.discordapp.com/attachments/717442783794692097/733268935310442556/Untitled-1.png"
       )
       .setDescription(error.stack);
-    console.log(error);
     client.users.cache
       .get(process.env.OWNER)
       .send(client.user.username + embed);
@@ -258,7 +257,7 @@ module.exports = {
       }
     }
   },
-  SpreadsheetGET: async function(sheet_id, tab, email, key) {
+  SpreadsheetGET: async function(sheet_id, email, key) {
     const doc = new GoogleSpreadsheet(sheet_id);
     await doc.useServiceAccountAuth({
       client_email: email,
@@ -266,9 +265,7 @@ module.exports = {
     });
 
     await doc.loadInfo();
-    const sheet = doc.sheetsByIndex[tab];
-    const rows = await sheet.getRows();
-    return { doc, sheet, rows };
+    return { doc };
   },
   SpreadsheetPOST: async function(sheet_id, tab, email, key, rowData) {
     const doc = new GoogleSpreadsheet(sheet_id);

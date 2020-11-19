@@ -8,6 +8,13 @@ module.exports = {
     const email = process.env.CLIENT_EMAIL_BANE;
     const id = process.env.PROJECT_ID_BANE;
     const answer = await functions.DialogflowQuery(message, key, email, id);
+
+    const data = await functions.SpreadsheetGET(
+      set[client.user.username].spreadsheetID,
+      email,
+      key
+    );
+
     try {
       //=========================================================================================================
       if (
@@ -28,14 +35,9 @@ module.exports = {
       ) {
         //=========================================================================================================
         if (answer.intent === "Tip") {
-          const data = await functions.SpreadsheetGET(
-            "1EUd3czTty60S7WhFn9Y5leOtH0lOu2LhLEvkQ62eE50",
-            2,
-            email,
-            key
-          );
-          const randomTip =
-            data.rows[Math.floor(Math.random() * data.rows.length)].tip;
+          const sheet = data.doc.sheetsByIndex[2];
+          const rows = await sheet.getRows();
+          const randomTip = rows[Math.floor(Math.random() * rows.length)].tip;
           message.channel.send("💡 " + randomTip);
         }
 
@@ -46,13 +48,9 @@ module.exports = {
           } else if (
             answer.result[0].queryResult.allRequiredParamsPresent === true
           ) {
-            const data = await functions.SpreadsheetGET(
-              "1EUd3czTty60S7WhFn9Y5leOtH0lOu2LhLEvkQ62eE50",
-              0,
-              email,
-              key
-            );
-            let embed = data.rows.filter(
+            const sheet = data.doc.sheetsByIndex[0];
+            const rows = await sheet.getRows();
+            let embed = rows.filter(
               row =>
                 row.name ==
                 answer.result[0].queryResult.parameters.fields.Weapon
