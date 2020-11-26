@@ -3,7 +3,7 @@ const functions = require("../functions.js");
 const datetime = require("node-datetime");
 
 module.exports = {
-  name: "cal", //post calendar events
+  name: "cal-info", //post calendar events
   async execute(client, message, args, set) {
     message.delete().catch(_ => {});
     if (client.user.username === "Mel") {
@@ -22,28 +22,8 @@ module.exports = {
             "https://cdn.discordapp.com/attachments/537419656181448716/774342289346002974/Untitled-1_1.png"
           );
 
-        const data = await functions.SpreadsheetGET(
-          set[client.user.username].spreadsheetID,
-          process.env.CLIENT_EMAIL_MEL,
-          process.env.PRIVATE_KEY_MEL.replace(/\\n/g, "\n")
-        );
-
-        const sheet = data.doc.sheetsByIndex[3];
-        const rows = await sheet.getRows();
-
-        const embeds = rows.map(e =>
-          message.channel.send(
-            new Discord.MessageEmbed()
-              .setColor(e.color)
-              .setAuthor(e.date, e.thumbnail)
-              .setTitle(e.name)
-              .setDescription(
-                `${e.description}\n\u200b\n**When?** ${e.time}\n**Where?** ${e.where}\n**Contact**: ${e.organizer}`
-              )
-              .setThumbnail(e.thumbnail)
-          )
-        );
-       // message.channel.send(announcementInfoEmbed);
+        
+        message.channel.send(announcementInfoEmbed);
       }
     }
   }

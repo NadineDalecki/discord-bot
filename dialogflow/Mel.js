@@ -37,7 +37,7 @@ module.exports = {
         const rows = await sheet.getRows();
         try {
           let embed = rows.filter(
-            row => row.name.toLowerCase() == signName
+            row => row.name.toLowerCase().includes(signName)
           );
           message.channel.send(embed[0].url);
         } catch (e) {
