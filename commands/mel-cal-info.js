@@ -16,7 +16,7 @@ module.exports = {
           .setColor("#d6113c")
           .setTitle("Weekly Announcements in Community News")
           .setDescription(
-            "You would like your event or training to be announced in this channel too? DM <@335528823615651842> by Thursday evening!"
+            "You would like your event or training to be announced in this channel too? DM <@396354000892592129> by Thursday evening!"
           )
           .setThumbnail(
             "https://cdn.discordapp.com/attachments/537419656181448716/774342289346002974/Untitled-1_1.png"

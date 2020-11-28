@@ -6,19 +6,21 @@ app.get("/", (request, response) => {
 app.listen();
 
 const BotTokens = [
-  process.env.BOT_MEL,
-  process.env.BOT_AFFEN,
+  /*process.env.BOT_MEL,
+  process.env.BOT_AFFEN
   process.env.BOT_VRL,
   process.env.BOT_ITSY,
   process.env.BOT_BANE,
   process.env.BOT_MO,
   process.env.BOT_KVN,
-  process.env.BOT_TG
+  process.env.BOT_TG*/
+  process.env.BOT_MO
 ];
 const set = require("./settings.json");
 const userMap = new Map();
 const functions = require("./functions.js");
 const Discord = require("discord.js");
+const schedule = require("node-schedule")
 
 process.on("error", error => console.log(error));
 process.on("uncaughtException", error => console.log(error));
@@ -38,7 +40,7 @@ function runBot(token) {
   client.on("error", error => functions.Error(client, error));
   client.on("messageDelete", async message => {
     if (set[client.user.username].deletedMessages == true) {
-     // functions.DeletedMessage(client, message);
+      // functions.DeletedMessage(client, message);
     }
   });
 
@@ -81,29 +83,32 @@ function runBot(token) {
         );
     }
   });
-
+  
   client.on("messageReactionAdd", async (reaction, user) => {
-    if (
-      set[client.user.username].rrRolesFunction == true 
-    ) {
+    if (set[client.user.username].rrRolesFunction == true) {
       functions.RoleAdd(
         client,
         reaction,
         user,
         set[client.user.username].rrMessageId
       );
+    } else if (
+      set[client.user.username].rrScheduler == true) {
+      await functions.Scheduler(client, reaction, user);
     }
   });
+
   client.on("messageReactionRemove", async (reaction, user) => {
-    if (
-      set[client.user.username].rrRolesFunction == true 
-    ) {
+    if (set[client.user.username].rrRolesFunction == true) {
       functions.RoleRemove(
         client,
         reaction,
         user,
         set[client.user.username].rrMessageId
       );
+    } else if (
+      set[client.user.username].rrScheduler == true) {
+      await functions.Scheduler(client, reaction, user);
     }
   });
 
@@ -125,7 +130,12 @@ function runBot(token) {
     if (client.user.id != message.author.id) {
       // COMMANDS =========================================================================================================
       if (message.content.startsWith(set[client.user.username].prefix)) {
-        functions.Command(client, message, set[client.user.username].prefix, set);
+        functions.Command(
+          client,
+          message,
+          set[client.user.username].prefix,
+          set
+        );
       } else {
         // MENTIONS =========================================================================================================
         if (

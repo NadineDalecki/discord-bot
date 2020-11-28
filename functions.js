@@ -201,8 +201,10 @@ module.exports = {
           .roles.add(set[client.user.username].rrRoles[emojiId].role);
       }
     }
-   if (set[client.user.username].rrAuto) {
-      reaction.message.guild.member(user).roles.add(set[client.user.username].rrAuto)
+    if (set[client.user.username].rrAuto) {
+      reaction.message.guild
+        .member(user)
+        .roles.add(set[client.user.username].rrAuto);
     }
   },
   RoleRemove: async function(client, reaction, user, id) {
@@ -225,6 +227,24 @@ module.exports = {
           .roles.remove(set[client.user.username].rrRoles[emojiId].role);
       }
     }
+  },
+  Scheduler: async function(client, reaction, user) {
+    if (reaction.partial && reaction.message.id === "781782602314285110") {
+      await reaction.fetch();
+    }
+    const ScrimEmbed = new Discord.MessageEmbed()
+      .setColor("#0099ff")
+      .setTitle("Reaction Collector")
+    const emoji = reaction.message.reactions.cache.map(emoji => emoji);
+    for (var item in emoji) {
+      ScrimEmbed.addField(
+        "\u200B",
+        emoji[item].emoji.name +
+          " | " +
+          emoji[item].users.cache.map(user => ` <@${user.id}>`)
+      );
+    }
+    reaction.message.edit(ScrimEmbed);
   },
   SpamStop: function(client, message, userMap, ignore_role) {
     if (message.channel.type == "dm") {
