@@ -6,14 +6,14 @@ app.get("/", (request, response) => {
 app.listen();
 
 const BotTokens = [
- /* process.env.BOT_MEL,
+  process.env.BOT_MEL,
   process.env.BOT_AFFEN,
   process.env.BOT_VRL,
   process.env.BOT_ITSY,
   process.env.BOT_BANE,
   process.env.BOT_MO,
   process.env.BOT_KVN,
-  process.env.BOT_TG,*/
+  process.env.BOT_TG,
   process.env.BOT_MO
 ];
 const set = require("./settings.json");
