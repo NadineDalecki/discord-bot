@@ -7,15 +7,14 @@ module.exports = {
     message.delete().catch(_ => {});
 
     if (client.user.username === "Mel") {
-      
       const data = await functions.SpreadsheetGET(
-      set[client.user.username].spreadsheetID,
-      process.env.CLIENT_EMAIL_MEL,
-      process.env.PRIVATE_KEY_MEL.replace(/\\n/g, "\n")
-    );
+        set[client.user.username].spreadsheetID,
+        process.env.CLIENT_EMAIL_MEL,
+        process.env.PRIVATE_KEY_MEL.replace(/\\n/g, "\n")
+      );
 
-       const sheet = data.doc.sheetsByIndex[4];
-        const rows = await sheet.getRows();
+      const sheet = data.doc.sheetsByIndex[4];
+      const rows = await sheet.getRows();
 
       const embed = new Discord.MessageEmbed()
         .setColor(rows[0].color)
