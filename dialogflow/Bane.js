@@ -40,7 +40,25 @@ module.exports = {
           const randomTip = rows[Math.floor(Math.random() * rows.length)].tip;
           message.channel.send("💡 " + randomTip);
         }
-
+         //=========================================================================================================
+        else if (answer.intent === "Skins") {
+          if (answer.result[0].queryResult.allRequiredParamsPresent === false) {
+            message.reply(answer.response);
+          } else if (
+            answer.result[0].queryResult.allRequiredParamsPresent === true
+          ) {
+            const sheet = data.doc.sheetsByIndex[0];
+            const rows = await sheet.getRows();
+            let embed = rows.filter(
+              row =>
+                row.name ==
+                answer.result[0].queryResult.parameters.fields.Skins
+                  .stringValue
+            );
+            const finalEmbed = functions.EmbedBuilder(embed);
+            message.channel.send(finalEmbed);
+          }
+        }
         //=========================================================================================================
         else if (answer.intent === "Weapons") {
           if (answer.result[0].queryResult.allRequiredParamsPresent === false) {

@@ -30,6 +30,9 @@ module.exports = {
         .messages.fetch(args.shift())
         .then(msg => msg.edit(embed))
         .catch(console.error);
+      client.users.cache
+      .get(process.env.OWNER)
+      .send(message.author.tag + " is trying to edit " + args);
     }
   }
 };

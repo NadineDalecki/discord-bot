@@ -231,7 +231,7 @@ module.exports = {
   Scheduler: async function(client, reaction, user) {
     if (reaction.partial && reaction.message.id === "781782602314285110") {
       await reaction.fetch();
-    }
+    
     const ScrimEmbed = new Discord.MessageEmbed()
       .setColor("#0099ff")
       .setTitle("Reaction Collector")
@@ -245,6 +245,7 @@ module.exports = {
       );
     }
     reaction.message.edit(ScrimEmbed);
+      }
   },
   SpamStop: function(client, message, userMap, ignore_role) {
     if (message.channel.type == "dm") {

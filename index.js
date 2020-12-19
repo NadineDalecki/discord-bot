@@ -11,7 +11,6 @@ const BotTokens = [
   process.env.BOT_VRL,
   process.env.BOT_ITSY,
   process.env.BOT_BANE,
-  process.env.BOT_MO,
   process.env.BOT_KVN,
   process.env.BOT_TG,
   process.env.BOT_MO
@@ -137,23 +136,8 @@ function runBot(token) {
           set
         );
       } else {
-        // MENTIONS =========================================================================================================
-        if (
-          (message.content.toLowerCase().includes("nada") ||
-            message.content.toLowerCase().includes("na_da")) &&
-          !message.author.bot &&
-          !message.content.toLowerCase().includes("canada")
-        ) {
-          functions.Mention(client, message, "338649491894829057");
-        } else if (
-          message.content.toLowerCase().includes("sendo") &&
-          !message.author.bot &&
-          message.guild.id != "632570524463136779"
-        ) {
-          functions.Mention(client, message, "119095000050040832");
-        }
         // Dialogflow =========================================================================================================
-        else if (
+        if (
           (client.user.id != message.author.id &&
             !message.content.startsWith(set[client.user.username].prefix) &&
             message.channel.type == "dm") ||
@@ -174,6 +158,21 @@ function runBot(token) {
           } else {
             functions.DialogflowIntents(client, message, set);
           }
+        }
+         // MENTIONS =========================================================================================================
+        else if (
+          (message.content.toLowerCase().includes("nada") ||
+            message.content.toLowerCase().includes("na_da")) &&
+          !message.author.bot &&
+          !message.content.toLowerCase().includes("canada")
+        ) {
+          functions.Mention(client, message, "338649491894829057");
+        } else if (
+          message.content.toLowerCase().includes("sendo") &&
+          !message.author.bot &&
+          message.guild.id != "632570524463136779"
+        ) {
+          functions.Mention(client, message, "119095000050040832");
         }
       }
     }
