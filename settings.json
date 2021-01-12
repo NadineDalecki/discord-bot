@@ -141,25 +141,6 @@
     "muteRole": ""
   },
 
-  "Mo": {
-    "guildId": "424911215714631690",
-    "prefix": "!",
-    "adminRoles": ["425225020382642176"],
-    "logChannel": "718176504437276682",
-    "guildLogs": false,
-    "deletedMessages": false,
-    "status": "dnd",
-    "activity": {
-      "name": "Dungeon Master",
-      "type": "PLAYING",
-      "url": "https://discord.com"
-    },
-    "rrScheduler": true,
-    "rrRolesFunction": false,
-    "rrMessageId": "",
-    "roles": {},
-    "muteRole": ""
-  },
   "KVN": {
     "guildId": "707307751033798666",
     "prefix": "!",

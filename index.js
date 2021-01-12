@@ -12,8 +12,7 @@ const BotTokens = [
   process.env.BOT_ITSY,
   process.env.BOT_BANE,
   process.env.BOT_KVN,
-  process.env.BOT_TG,
-  process.env.BOT_MO
+  process.env.BOT_TG
 ];
 const set = require("./settings.json");
 const userMap = new Map();
