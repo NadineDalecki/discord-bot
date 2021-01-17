@@ -3,7 +3,7 @@ const functions = require("../functions.js");
 const datetime = require("node-datetime");
 
 module.exports = {
-  name: "cal", //post calendar events
+  name: "calold", //post calendar events
   async execute(client, message, args, set) {
     message.delete().catch(_ => {});
     if (client.user.username === "Mel") {
