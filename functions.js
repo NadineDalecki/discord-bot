@@ -6,7 +6,7 @@ const { google } = require("googleapis");
 const set = require("./settings.json");
 
 module.exports = {
-  DialogflowIntents: function(client, message, set) {
+  DialogflowIntents: function(client, message, functions, set) {
     client.dialogues = new Discord.Collection();
     const dialogflowFiles = fs
       .readdirSync("./dialogflow")
@@ -18,12 +18,12 @@ module.exports = {
 
     if (!client.dialogues.has(client.user.username)) return;
     try {
-      client.dialogues.get(client.user.username).execute(client, message, set);
+      client.dialogues.get(client.user.username).execute(client, message, functions, set);
     } catch (error) {
       console.error(error);
     }
   },
-  Command: function(client, message, Prefix, set) {
+  Command: function(client, Discord, message, functions, Prefix, set) {
     client.commands = new Discord.Collection();
     const commandFiles = fs
       .readdirSync("./commands")
@@ -37,7 +37,7 @@ module.exports = {
     if (!client.commands.has(command)) return;
     try {
       if (command !== "") {
-        client.commands.get(command).execute(client, message, args, set);
+        client.commands.get(command).execute(client, Discord, message, functions, args, set);
       }
     } catch (error) {
       console.error(error);
@@ -75,16 +75,16 @@ module.exports = {
       console.log(error);
     }
   },
-  DialogflowQuery: async function(message, key, email, id) {
+  DialogflowQuery: async function(client, message) {
     const config = {
       credentials: {
-        private_key: key,
-        client_email: email
+        private_key: process.env[`PRIVATE_KEY_${client.user.username.toUpperCase()}`].replace(/\\n/g, "\n"),
+        client_email: process.env[`CLIENT_EMAIL_${client.user.username.toUpperCase()}`]
       }
     };
     const sessionClient = new dialogflow.SessionsClient(config);
     const sessionPath = sessionClient.projectAgentSessionPath(
-      id,
+      process.env[`PROJECT_ID_${client.user.username.toUpperCase()}`],
       message.author.id.substring(0, 11)
     );
     const request = {
@@ -103,6 +103,7 @@ module.exports = {
   },
   EmbedBuilder: function(embed) {
     const newEmbed = new Discord.MessageEmbed();
+    newEmbed.setColor("#ffffff");
     if (embed[0].Color !== "undefined") {
       newEmbed.setColor(embed[0].Color);
     }
@@ -231,21 +232,21 @@ module.exports = {
   Scheduler: async function(client, reaction, user) {
     if (reaction.partial && reaction.message.id === "781782602314285110") {
       await reaction.fetch();
-    
-    const ScrimEmbed = new Discord.MessageEmbed()
-      .setColor("#0099ff")
-      .setTitle("Reaction Collector")
-    const emoji = reaction.message.reactions.cache.map(emoji => emoji);
-    for (var item in emoji) {
-      ScrimEmbed.addField(
-        "\u200B",
-        emoji[item].emoji.name +
-          " | " +
-          emoji[item].users.cache.map(user => ` <@${user.id}>`)
-      );
-    }
-    reaction.message.edit(ScrimEmbed);
+
+      const ScrimEmbed = new Discord.MessageEmbed()
+        .setColor("#0099ff")
+        .setTitle("Reaction Collector");
+      const emoji = reaction.message.reactions.cache.map(emoji => emoji);
+      for (var item in emoji) {
+        ScrimEmbed.addField(
+          "\u200B",
+          emoji[item].emoji.name +
+            " | " +
+            emoji[item].users.cache.map(user => ` <@${user.id}>`)
+        );
       }
+      reaction.message.edit(ScrimEmbed);
+    }
   },
   SpamStop: function(client, message, userMap, ignore_role) {
     if (message.channel.type == "dm") {
@@ -281,21 +282,26 @@ module.exports = {
       }
     }
   },
-  SpreadsheetGET: async function(sheet_id, email, key) {
-    const doc = new GoogleSpreadsheet(sheet_id);
+  SpreadsheetGET: async function(client) {
+    const doc = new GoogleSpreadsheet(set[client.user.username].spreadsheetID);
     await doc.useServiceAccountAuth({
-      client_email: email,
-      private_key: key
+      client_email:
+        process.env[`CLIENT_EMAIL_${client.user.username.toUpperCase()}`],
+      private_key: process.env[
+        `PRIVATE_KEY_${client.user.username.toUpperCase()}`
+      ].replace(/\\n/g, "\n")
     });
 
     await doc.loadInfo();
     return { doc };
   },
-  SpreadsheetPOST: async function(sheet_id, tab, email, key, rowData) {
+  SpreadsheetPOST: async function(client, sheet_id, tab, rowData) {
     const doc = new GoogleSpreadsheet(sheet_id);
     await doc.useServiceAccountAuth({
-      client_email: email,
-      private_key: key
+      client_email: process.env[`CLIENT_EMAIL_${client.user.username.toUpperCase()}`],
+      private_key: process.env[
+        `PRIVATE_KEY_${client.user.username.toUpperCase()}`
+      ].replace(/\\n/g, "\n")
     });
 
     await doc.loadInfo();

@@ -1,13 +1,9 @@
 module.exports = {
   name: "Affen",
-  execute: async function(client, message, set) {
+  execute: async function(client, message, functions, set) {
     const Discord = require("discord.js");
-    const functions = require("../functions.js");
     const fetch = require("node-fetch");
-    const key = process.env.PRIVATE_KEY_AFFEN.replace(/\\n/g, "\n");
-    const email = process.env.CLIENT_EMAIL_AFFEN;
-    const id = process.env.PROJECT_ID_AFFEN;
-    const answer = await functions.DialogflowQuery(message, key, email, id);
+    const answer = await functions.DialogflowQuery(client, message);
 
     //=========================================================================================================
     if (answer.intent === "history") {
@@ -56,6 +52,27 @@ module.exports = {
     //=========================================================================================================
     else if (answer.intent === "Spam | Spoon") {
       message.react("587741249214218260");
+    }
+    //=========================================================================================================
+        else if (answer.intent === "Spoon me") {
+      if (client.guilds.cache.get("387015404092129282").member(message.author.id).roles.cache.has("769226775745003580") ||  
+          client.guilds.cache.get("387015404092129282").member(message.author.id).roles.cache.has("769227627508138016")) {
+          client.guilds.cache.get("387015404092129282").member(message.author.id).roles.add("784126430820433971")
+          message.react("587741249214218260");
+      }
+      else {
+        message.reply("Nah, forget it.")
+      }
+    }
+    //=========================================================================================================
+        else if (answer.intent === "Stop spoon") {
+      if (client.guilds.cache.get("387015404092129282").member(message.author.id).roles.cache.has("784126430820433971")) {
+          client.guilds.cache.get("387015404092129282").member(message.author.id).roles.remove("784126430820433971")
+          message.react("🆗");
+      }
+      else {
+        message.react("❓")
+      }
     }
     //=========================================================================================================
     else {

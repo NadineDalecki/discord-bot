@@ -1,12 +1,15 @@
-const Discord = require("discord.js");
-
 module.exports = {
   name: "welcome",
-  execute(client, message, args, set) {
+  execute(client, Discord, message, functions, args, set) {
     message.delete().catch(_ => {});
     if (
-      message.member.roles.cache.includes(set[client.user.username].adminRoles)
+      message.member.hasPermission("ADMINISTRATOR")
     ){
+      if (client.user.username === "Itsy") {
+        message.channel.send(Itsy).then(async msg => {
+        //  await msg.react("744177070162182275"); //Bagel
+        });
+      }
     /*  if (client.user.username === "VRL") {
         //=========================================================================================================
         {
@@ -107,10 +110,7 @@ const Itsy = new Discord.MessageEmbed()
     "\n\u200b\n[<:twitter:744176978747326546>](<https://twitter.com/vrcommbuilders>)\u2003\u2003[<:facebook:744176978806046813>](<https://www.facebook.com/groups/vrcommunitybuilders/>)\u2003\u2003[<:website:744176979103973436>](<https://www.vrcommunitybuilders.com/>)\n\u200b\n"
   )
 
-  .addField(
-    "ROLES",
-    "If you identify with our values and promise to help us keeping this server a friendly and supportive place, then please react with our emoji to get full access to our server."
-  );
+ 
 
 const KVN1 = new Discord.MessageEmbed().setImage(
   "https://imgur.com/vGxoDU6.png"

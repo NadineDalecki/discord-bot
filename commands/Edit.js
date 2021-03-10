@@ -1,23 +1,21 @@
-const Discord = require("discord.js");
 module.exports = {
   name: "edit",
-  execute(client, message, args, set) {
+  async execute(client, Discord, message, functions, args, set) {
     message.delete().catch(_ => {});
     if (message.member.hasPermission("ADMINISTRATOR")) {
+      const data = await functions.SpreadsheetGET(client);
+      const sheet = data.doc.sheetsByTitle["Embed Update"];
+      const rows = await sheet.getRows();
+
+      let embed = rows.filter(row => row.name == args[2]);
+      const finalEmbed = functions.EmbedBuilder(embed);
+
       client.channels.cache
         .get(args[0])
         .messages.fetch(args[1])
-        .then(msg => msg.edit(embed))
+        .then(msg => msg.edit(finalEmbed))
         .catch(console.error);
-      const embed = new Discord.MessageEmbed()
-        .setColor("#d6113c")
-        .setTitle("Weekly Announcements in Community News")
-        .setDescription(
-          "You would like your event or training to be announced in this channel too? DM <@335528823615651842> by Thursday evening!"
-        )
-        .setThumbnail(
-          "https://cdn.discordapp.com/attachments/537419656181448716/774342289346002974/Untitled-1_1.png"
-        );
+      console.log("Updating Embed")
     }
   }
 };

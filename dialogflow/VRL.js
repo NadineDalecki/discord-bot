@@ -1,12 +1,8 @@
 module.exports = {
   name: "VRL",
-  execute: async function(client, message, set) {
+  execute: async function(client, message, functions, set) {
     const Discord = require("discord.js");
-    const functions = require("../functions.js");
-    const key = process.env.PRIVATE_KEY_VRL.replace(/\\n/g, "\n");
-    const email = process.env.CLIENT_EMAIL_VRL;
-    const id = process.env.PROJECT_ID_VRL;
-    const answer = await functions.DialogflowQuery(message, key, email, id);
+    const answer = await functions.DialogflowQuery(client, message);
 
     //=========================================================================================================
     if (answer.intent === "Streams"){

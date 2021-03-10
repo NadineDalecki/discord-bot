@@ -18,7 +18,6 @@ const set = require("./settings.json");
 const userMap = new Map();
 const functions = require("./functions.js");
 const Discord = require("discord.js");
-const schedule = require("node-schedule")
 
 process.on("error", error => console.log(error));
 process.on("uncaughtException", error => console.log(error));
@@ -42,56 +41,22 @@ function runBot(token) {
     }
   });
 
-  client.on("guildMemberAdd", guildMember => {
-    if (set[client.user.username].guildLogs == true) {
-      client.channels.cache
-        .get(set[client.user.username].logChannel)
-        .send(
-          `${guildMember.username} joined\nMember count: ${guildMember.guild.memberCount}`
-        );
-    }
-    if (
-      set[client.user.username].JoinDM == true &&
-      guildMember.guild.id == set[client.user.username].guildId
-    ) {
-      try {
-        setTimeout(function() {
-          guildMember.send(set[client.user.username].JoinDMText);
-        }, 3000);
-      } catch (error) {
-        functions.error(client, error);
-      }
-    }
-  });
-  client.on("guildMemberRemove", member => {
-    if (set[client.user.username].guildLogs == true) {
-      client.channels.cache
-        .get(set[client.user.username].logChannel)
-        .send(
-          `${member.user.username} left\nMember count: ${member.guild.memberCount}`
-        );
-    }
-  });
-  client.on("guildBanAdd", function(guild, user, member) {
-    if (set[client.user.username].guildLogs == true) {
-      client.channels.cache
-        .get(set[client.user.username].logChannel)
-        .send(
-          `${member.user.username} banned\nMember count: ${member.guild.memberCount}`
-        );
-    }
-  });
-  
   client.on("messageReactionAdd", async (reaction, user) => {
     if (set[client.user.username].rrRolesFunction == true) {
+      console.log(
+        client.user.username +
+          " tried to add a role after " +
+          user.username +
+          " clicked " +
+          reaction.emoji.name
+      );
       functions.RoleAdd(
         client,
         reaction,
         user,
         set[client.user.username].rrMessageId
       );
-    } else if (
-      set[client.user.username].rrScheduler == true) {
+    } else if (set[client.user.username].rrScheduler == true) {
       await functions.Scheduler(client, reaction, user);
     }
   });
@@ -104,8 +69,7 @@ function runBot(token) {
         user,
         set[client.user.username].rrMessageId
       );
-    } else if (
-      set[client.user.username].rrScheduler == true) {
+    } else if (set[client.user.username].rrScheduler == true) {
       await functions.Scheduler(client, reaction, user);
     }
   });
@@ -129,36 +93,47 @@ function runBot(token) {
       // COMMANDS =========================================================================================================
       if (message.content.startsWith(set[client.user.username].prefix)) {
         functions.Command(
-          client,
-          message,
+          client, Discord,
+          message, functions, 
           set[client.user.username].prefix,
           set
         );
       } else {
         // Dialogflow =========================================================================================================
         if (
-          (client.user.id != message.author.id &&
-            !message.content.startsWith(set[client.user.username].prefix) &&
-            message.channel.type == "dm") ||
-          (message.cleanContent.startsWith("@" + client.user.username + " ") ||
-            message.cleanContent.startsWith(client.user.username + " ") ||
-            message.cleanContent.startsWith(
-              client.user.username.toLowerCase() + " "
-            ))
+          !message.content.startsWith(set[client.user.username].prefix) &&
+          client.user.id != message.author.id
         ) {
-          if (client.user.username === "Mel") {
-            functions.SpamStop(
-              client,
-              message,
-              userMap,
-              set[client.user.username].muteRole
-            );
-            functions.DialogflowIntents(client, message, set);
-          } else {
-            functions.DialogflowIntents(client, message, set);
+          
+          if (client.user.username === "Bane"){
+             if (message.mentions.has(client.user.id) ||
+             message.channel.type == "dm") {
+            functions.DialogflowIntents(client, message, functions, set);
+            } 
+          }
+          
+          else if (message.channel.type == "dm" ||
+            (message.mentions.has(client.user.id) ||
+             message.cleanContent.startsWith(client.user.username + " ") ||
+             message.cleanContent.startsWith(client.user.username.toLowerCase() + " "))
+          ) {
+            
+            if (client.user.username === "Mel") {
+              functions.SpamStop(
+                client,
+                message,
+                userMap,
+                set[client.user.username].muteRole
+              );
+              functions.DialogflowIntents(client, message, functions, set);
+            } 
+            
+            else {
+              functions.DialogflowIntents(client, message, functions, set);
+            }
           }
         }
-         // MENTIONS =========================================================================================================
+        // MENTIONS =========================================================================================================
         else if (
           (message.content.toLowerCase().includes("nada") ||
             message.content.toLowerCase().includes("na_da")) &&
@@ -172,6 +147,16 @@ function runBot(token) {
           message.guild.id != "632570524463136779"
         ) {
           functions.Mention(client, message, "119095000050040832");
+        } else if (
+          message.content.toLowerCase().includes("hasko") &&
+          !message.author.bot &&
+          message.guild.id != "632570524463136779" &&
+          message.guild.id != "387015404092129282" && //EU
+          message.guild.id != "421618914166833152" && //Gravity
+          message.guild.id != "707307751033798666" && //Virtex
+          message.guild.id != "424911215714631690" //Dungeon
+        ) {
+          functions.Mention(client, message, "335528823615651842");
         }
       }
     }

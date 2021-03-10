@@ -1,18 +1,10 @@
 module.exports = {
   name: "Mel",
-  execute: async function(client, message, set) {
+  execute: async function(client, message, functions, set) {
     const Discord = require("discord.js");
-    const functions = require("../functions.js");
-    const key = process.env.PRIVATE_KEY_MEL.replace(/\\n/g, "\n");
-    const email = process.env.CLIENT_EMAIL_MEL;
-    const id = process.env.PROJECT_ID_MEL;
-    const answer = await functions.DialogflowQuery(message, key, email, id);
+    const answer = await functions.DialogflowQuery(client, message);
 
-    const data = await functions.SpreadsheetGET(
-      set[client.user.username].spreadsheetID,
-      email,
-      key
-    );
+    const data = await functions.SpreadsheetGET(client);
 
     if (
       message.channel.type == "dm" ||
@@ -20,8 +12,7 @@ module.exports = {
     ) {
       //=========================================================================================================
       if (answer.intent.substring(0, 5) === "embed") {
-        const sheet = data.doc.sheetsByIndex[0];
-        const rows = await sheet.getRows();
+        const rows = await data.doc.sheetsByTitle["Embeds"].getRows();
         let embed = rows.filter(row => row.name == answer.intent);
         const finalEmbed = functions.EmbedBuilder(embed);
         message.reply(finalEmbed);
@@ -33,8 +24,7 @@ module.exports = {
           message.channel.type == "dm")
       ) {
         const signName = answer.result[0].queryResult.parameters.fields.sign.stringValue.toLowerCase();
-        const sheet = data.doc.sheetsByIndex[6];
-        const rows = await sheet.getRows();
+        const rows = await data.doc.sheetsByTitle["ESL"].getRows();
         try {
           let embed = rows.filter(
             row => row.name.toLowerCase().includes(signName)
@@ -46,8 +36,7 @@ module.exports = {
       }
       //=========================================================================================================
       else if (answer.intent === "Invite | ?") {
-        const sheet = data.doc.sheetsByIndex[1];
-        const rows = await sheet.getRows();
+        const rows = await data.doc.sheetsByTitle["Server Links"].getRows();
         const serverName =
           answer.result[0].queryResult.parameters.fields["discord-server"]
             .stringValue;
@@ -64,8 +53,7 @@ module.exports = {
         (message.channel.id == "328962843800109067" ||
           message.channel.type == "dm")
       ) {
-        const sheet = data.doc.sheetsByIndex[6];
-        const rows = await sheet.getRows();
+        const rows = await data.doc.sheetsByTitle["ESL"].getRows();
         const commands = rows.map(commands => `${commands.name}`);
         const embed = new Discord.MessageEmbed().setDescription(
           commands.join(" | ")
@@ -96,8 +84,8 @@ module.exports = {
           message.channel.id == "333796567746084864" ||
           message.channel.type == "dm"
         ) {
-          const sheet = data.doc.sheetsByIndex[2];
-          const rows = await sheet.getRows();
+          
+          const rows = await data.doc.sheetsByTitle["Memes"].getRows();
           const randomMeme =
             rows[Math.floor(Math.random() * rows.length)].meme;
           message.channel.send(randomMeme);

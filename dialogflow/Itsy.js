@@ -1,21 +1,75 @@
 module.exports = {
   name: "Itsy",
-  execute: async function(client, message, set) {
+  execute: async function(client, message, functions, set) {
     const Discord = require("discord.js");
-    const functions = require("../functions.js");
-    const key = process.env.PRIVATE_KEY_ITSY.replace(/\\n/g, "\n");
-    const email = process.env.CLIENT_EMAIL_ITSY;
-    const id = process.env.PROJECT_ID_ITSY;
     const axios = require("axios");
-    const answer = await functions.DialogflowQuery(message, key, email, id);
-    const siteID = "5ed8826082212c5dc8270931"
-
+    const answer = await functions.DialogflowQuery(client, message);
+    
+    const CollectionList= await axios.request({
+          url:
+            "https://api.webflow.com/sites/5ed8826082212c5dc8270931/collections",
+          method: "get",
+          headers: {
+            Authorization: process.env.WEBFLOW_ITSY,
+            "accept-version": "1.0.0"
+          }
+        });
+       
+    //=================================================================
+    if (answer.intent.substring(0, 5) === "embed") {
+      
+        const data = await functions.SpreadsheetGET(client)
+        const rows = await data.doc.sheetsByTitle["Embeds"].getRows();
+        let embed = rows.filter(row => row.name == answer.intent);
+        const finalEmbed = functions.EmbedBuilder(embed);
+        message.reply(finalEmbed);
+      }
     //=========================================================================================================
+    if (answer.intent === "Blog") { //throws an error that it can't send an empty message but works fine?
+      try {
+        
+        let blogCollection = CollectionList.data.filter(
+          collection=> collection.name === "Blog Posts"
+        );
+        
+        const BlogData = await axios.request({
+          url:
+            `https://api.webflow.com/collections/${blogCollection[0]["_id"]}/items?live=true`,
+          method: "get",
+          headers: {
+            Authorization: process.env.WEBFLOW_ITSY,
+             "accept-version": "1.0.0"
+          }
+        });
+        const imageLink = BlogData.data.items[0]["main-image"].url
+        const embed = new Discord.MessageEmbed()
+          .setColor("#0099ff")
+          .setTitle(BlogData.data.items[0].name)
+          .setURL(
+            `https://www.vrcommunitybuilders.com/post/${BlogData.data.items[0].slug}`
+          )
+          .setDescription(BlogData.data.items[0]["post-summary"])
+          .setImage(imageLink)
+          .setFooter("Published on:" + BlogData.data.items[0]["custom-date"])
+
+        message.reply(embed);
+      } catch (error) {
+        message.reply(
+          "Hm, sorry I could not find what you were looking for! 😟"
+        );
+      }
+    } 
+    //=======================================================================================================
     if (answer.intent === "Webflow | What is?") {
       try {
+        
+        let communityCollection = CollectionList.data.filter(
+          collection => collection.name === "Communities"
+        );
+       
         const CommunitiesData = await axios.request({
           url:
-            "https://api.webflow.com/collections/5f5e48b99cb30538584249a1/items?live=true",
+            `https://api.webflow.com/collections/${communityCollection[0]["_id"]}/items?live=true`,
           method: "get",
           headers: {
             Authorization: process.env.WEBFLOW_ITSY,
@@ -27,6 +81,7 @@ module.exports = {
         let community = CommunitiesData.data.items.filter(
           communities => communities.name.toLowerCase() === args.toLowerCase()
         );
+        
         const embed = new Discord.MessageEmbed()
           .setColor("#0099ff")
           .setTitle(community[0].name)
@@ -34,7 +89,7 @@ module.exports = {
             `https://www.vrcommunitybuilders.com/communities/${community[0].slug}`
           )
           .setDescription(community[0]["discord-description"])
-          .setThumbnail(community[0]["300x300-logo-on-black"].url)
+          .setThumbnail(community[0].logo.url)
           .setImage(community[0]["cover-image"].url);
 
         message.reply(embed);
@@ -48,16 +103,20 @@ module.exports = {
       //=========================================================================================================
     else if (answer.intent === "Webflow | Who is?") {
       try {
+        
+        let memberCollection = CollectionList.data.filter(
+          collection => collection.name === "Team Members"
+        );
+        
         const MemberData = await axios.request({
           url:
-            "https://api.webflow.com/collections/5f5e48b99cb3050e664249a5/items?live=true",
+             `https://api.webflow.com/collections/${memberCollection[0]["_id"]}/items?live=true`,
           method: "get",
           headers: {
             Authorization: process.env.WEBFLOW_ITSY,
             "accept-version": "1.0.0"
           }
         });
-        console.log(MemberData.data.items)
         const args = answer.result[0].queryResult.parameters.fields.Member.stringValue;
         let Member = MemberData.data.items.filter(
           member => member.name === args
