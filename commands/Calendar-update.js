@@ -1,12 +1,12 @@
-const Discord = require("discord.js");
-const functions = require("../functions.js");
-
 module.exports = {
   name: "calendar-edit",
   async execute(client, Discord, message, functions, args, set) {
     message.delete().catch(_ => {});
-
-    if (client.user.username === "Mel") {
+    const adminRoles = set[client.user.username].adminRoles;
+    if (
+      message.member.roles.cache.some(r => adminRoles.includes(r.id)) ||
+      message.member.hasPermission("ADMINISTRATOR")
+    ) {
       const newEmbed = new Discord.MessageEmbed()
         .setColor("#d6113c")
         .setTitle("Community News")
@@ -16,7 +16,7 @@ module.exports = {
         );
 
       const data = await functions.SpreadsheetGET(client);
-      const sheet = data.doc.sheetsByTitle["Calendar"]
+      const sheet = data.doc.sheetsByTitle["Calendar"];
       const rows = await sheet.getRows();
 
       rows.map(e =>
@@ -29,11 +29,12 @@ module.exports = {
       const messageID = args[0];
       console.log(args[0]);
 
-     client.channels.cache
+      client.channels.cache
         .get(args[0])
         .messages.fetch(args[1])
         .then(msg => msg.edit(newEmbed))
         .catch(console.error);
+      console.log("Updating Embed");
     }
   }
 };

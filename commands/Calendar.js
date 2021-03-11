@@ -1,14 +1,14 @@
 module.exports = {
-  name: "calendar", 
+  name: "calendar",
   async execute(client, Discord, message, functions, args, set) {
     message.delete().catch(_ => {});
-    if (client.user.username === "Mel") {
-      if (
-        message.member.roles.cache.has("326414022884982784") || //admin
-        message.member.roles.cache.has("702591687096270848") || //mod
-        message.member.hasPermission("ADMINISTRATOR")
-      ) {
-        const announcementInfoEmbed = new Discord.MessageEmbed()
+    const adminRoles = set[client.user.username].adminRoles;
+    if (message.channel.type == "dm" || 
+      message.member.roles.cache.some(r => adminRoles.includes(r.id)) ||
+      message.member.hasPermission("ADMINISTRATOR")
+    ) {
+      {
+        const embed = new Discord.MessageEmbed()
           .setColor("#d6113c")
           .setTitle("Community News")
           .setFooter(
@@ -17,16 +17,16 @@ module.exports = {
           );
 
         const data = await functions.SpreadsheetGET(client);
-        const sheet = data.doc.sheetsByTitle["Calendar"]
+        const sheet = data.doc.sheetsByTitle["Calendar"];
         const rows = await sheet.getRows();
 
         rows.map(e =>
-          announcementInfoEmbed.addField(
+          embed.addField(
             `${e.thumbnail}　${e.date} | ${e.time} | ${e.name}`,
             `${e.description}\nContact ${e.organizer} | ${e.where}\n\u200b\n`
           )
         );
-        message.channel.send(announcementInfoEmbed);
+        message.channel.send(embed);
       }
     }
   }

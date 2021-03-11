@@ -4,7 +4,7 @@ module.exports = {
     const Discord = require("discord.js");
     const functions = require("../functions.js");
     const answer = await functions.DialogflowQuery(client, message);
-    const AskBaneChannel = "776420085995929600"
+    const AskBaneChannel = "776420085995929600";
 
     const data = await functions.SpreadsheetGET(client);
 
@@ -31,7 +31,7 @@ module.exports = {
         message.channel.type == "dm"
       ) {
         if (answer.intent === "Tip") {
-          const sheet = data.doc.sheetsByTitle["Tips"]
+          const sheet = data.doc.sheetsByTitle["Tips"];
           const rows = await sheet.getRows();
           const randomTip = rows[Math.floor(Math.random() * rows.length)].tip;
           message.reply("💡 " + randomTip);
@@ -43,7 +43,7 @@ module.exports = {
           } else if (
             answer.result[0].queryResult.allRequiredParamsPresent === true
           ) {
-            const sheet = data.doc.sheetsByTitle["Embeds"]
+            const sheet = data.doc.sheetsByTitle["Embeds"];
             const rows = await sheet.getRows();
             let embed = rows.filter(
               row =>
@@ -62,7 +62,7 @@ module.exports = {
           } else if (
             answer.result[0].queryResult.allRequiredParamsPresent === true
           ) {
-            const sheet = data.doc.sheetsByTitle["Embeds"]
+            const sheet = data.doc.sheetsByTitle["Embeds"];
             const rows = await sheet.getRows();
             let embed = rows.filter(
               row =>
@@ -80,7 +80,7 @@ module.exports = {
           } else if (
             answer.result[0].queryResult.allRequiredParamsPresent === true
           ) {
-            const sheet = data.doc.sheetsByTitle["Embeds"]
+            const sheet = data.doc.sheetsByTitle["Embeds"];
             const rows = await sheet.getRows();
 
             let embed = rows.filter(
@@ -98,13 +98,14 @@ module.exports = {
           message.reply(answer.response);
           functions.Inform(client, answer, message);
         }
-      } 
-      else {
+      } else {
         if (answer.intent === "Tip") {
-          const sheet = data.doc.sheetsByByTitle["Tips"]
+          const sheet = data.doc.sheetsByByTitle["Tips"];
           const rows = await sheet.getRows();
           const randomTip = rows[Math.floor(Math.random() * rows.length)].tip;
-          client.channels.cache.get(AskBaneChannel).send(`${message.author}` + "💡 " + randomTip);
+          client.channels.cache
+            .get(AskBaneChannel)
+            .send(`${message.author}` + "💡 " + randomTip);
         }
         //=========================================================================================================
         else if (answer.intent === "Locations") {
@@ -113,7 +114,7 @@ module.exports = {
           } else if (
             answer.result[0].queryResult.allRequiredParamsPresent === true
           ) {
-            const sheet = data.doc.sheetsByTitle["Embeds"]
+            const sheet = data.doc.sheetsByTitle["Embeds"];
             const rows = await sheet.getRows();
             let embed = rows.filter(
               row =>
@@ -122,7 +123,7 @@ module.exports = {
                   .stringValue
             );
             const finalEmbed = functions.EmbedBuilder(embed);
-            client.channels.cache.get(AskBaneChannel).send(`${message.author}`)
+            client.channels.cache.get(AskBaneChannel).send(`${message.author}`);
             client.channels.cache.get(AskBaneChannel).send(finalEmbed);
           }
         }
@@ -133,7 +134,7 @@ module.exports = {
           } else if (
             answer.result[0].queryResult.allRequiredParamsPresent === true
           ) {
-            const sheet = data.doc.sheetsByTitle["Embeds"]
+            const sheet = data.doc.sheetsByTitle["Embeds"];
             const rows = await sheet.getRows();
             let embed = rows.filter(
               row =>
@@ -141,7 +142,7 @@ module.exports = {
                 answer.result[0].queryResult.parameters.fields.Skins.stringValue
             );
             const finalEmbed = functions.EmbedBuilder(embed);
-            client.channels.cache.get(AskBaneChannel).send(`${message.author}`)
+            client.channels.cache.get(AskBaneChannel).send(`${message.author}`);
             client.channels.cache.get(AskBaneChannel).send(finalEmbed);
           }
         }
@@ -152,7 +153,7 @@ module.exports = {
           } else if (
             answer.result[0].queryResult.allRequiredParamsPresent === true
           ) {
-            const sheet = data.doc.sheetsByTitle["Embeds"]
+            const sheet = data.doc.sheetsByTitle["Embeds"];
             const rows = await sheet.getRows();
 
             let embed = rows.filter(
@@ -162,16 +163,22 @@ module.exports = {
                   .stringValue
             );
             const finalEmbed = functions.EmbedBuilder(embed);
-            client.channels.cache.get(AskBaneChannel).send(`${message.author}`)
+            client.channels.cache.get(AskBaneChannel).send(`${message.author}`);
             client.channels.cache.get(AskBaneChannel).send(finalEmbed);
           }
         }
         //=========================================================================================================
         else {
-          client.channels.cache.get(AskBaneChannel).send(`${message.author}` + answer.response);
+          client.channels.cache
+            .get(AskBaneChannel)
+            .send(`${message.author}` + answer.response);
           functions.Inform(client, answer, message);
         }
-         client.channels.cache.get(AskBaneChannel).send("If you have further questions let's continue our little chat here!");
+        client.channels.cache
+          .get(AskBaneChannel)
+          .send(
+            "If you have further questions let's continue our little chat here!"
+          );
       }
     } catch (e) {
       client.users.cache.get(process.env.OWNER).send(e + " " + message);

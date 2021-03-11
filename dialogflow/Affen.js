@@ -2,7 +2,7 @@ module.exports = {
   name: "Affen",
   execute: async function(client, message, functions, set) {
     const Discord = require("discord.js");
-    const fetch = require("node-fetch");
+    const axios = require("axios");
     const answer = await functions.DialogflowQuery(client, message);
 
     //=========================================================================================================
@@ -17,20 +17,20 @@ module.exports = {
     } else if (answer.intent === "urban") {
       const entityValue =
         answer.result[0].queryResult.parameters.fields.word.stringValue;
-      const body = await fetch(
-        `https://api.urbandictionary.com/v0/define?term=${entityValue}`
-      )
-        .then(response => response.json())
-        .catch(error => {
-          functions.error(client, error);
+      
+       const urban= await axios.request({
+          url:
+            `https://api.urbandictionary.com/v0/define?term=${entityValue}`,
+          method: "get",
+          
         });
-      if (body.list[0] == undefined) {
+      if (urban.data.list[0] == undefined) {
         message.reply(
           " even the urban dictionary doesn't know that word. Admit it, you made that shit up!"
         );
       } else {
         message.reply(
-          `**The Urban Dictionary defines "${entityValue}" as:**\n\n *${body.list[0].definition}*\n\n You can read more about "${entityValue}" here: <${body.list[0].permalink}>`
+          `**The Urban Dictionary defines "${entityValue}" as:**\n\n *${urban.data.list[0].definition}*\n\n You can read more about "${entityValue}" here: <${urban.data.list[0].permalink}>`
         );
       }
     }

@@ -23,7 +23,7 @@ module.exports = {
       console.error(error);
     }
   },
-  Command: function(client, Discord, message, functions, Prefix, set) {
+  Command: function(client, Discord, message, functions, set) {
     client.commands = new Discord.Collection();
     const commandFiles = fs
       .readdirSync("./commands")
@@ -32,7 +32,7 @@ module.exports = {
       const command = require(`./commands/${file}`);
       client.commands.set(command.name, command);
     }
-    const args = message.content.slice(Prefix.length).split(/ +/);
+    const args = message.content.slice(set[client.user.username].prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
     if (!client.commands.has(command)) return;
     try {
@@ -295,8 +295,8 @@ module.exports = {
     await doc.loadInfo();
     return { doc };
   },
-  SpreadsheetPOST: async function(client, sheet_id, tab, rowData) {
-    const doc = new GoogleSpreadsheet(sheet_id);
+  SpreadsheetPOST: async function(client, tab, rowData) {
+    const doc = new GoogleSpreadsheet(set[client.user.username].spreadsheetID);
     await doc.useServiceAccountAuth({
       client_email: process.env[`CLIENT_EMAIL_${client.user.username.toUpperCase()}`],
       private_key: process.env[

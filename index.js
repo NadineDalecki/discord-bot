@@ -35,6 +35,7 @@ function runBot(token) {
   });
 
   client.on("error", error => functions.Error(client, error));
+
   client.on("messageDelete", async message => {
     if (set[client.user.username].deletedMessages == true) {
       // functions.DeletedMessage(client, message);
@@ -43,13 +44,6 @@ function runBot(token) {
 
   client.on("messageReactionAdd", async (reaction, user) => {
     if (set[client.user.username].rrRolesFunction == true) {
-      console.log(
-        client.user.username +
-          " tried to add a role after " +
-          user.username +
-          " clicked " +
-          reaction.emoji.name
-      );
       functions.RoleAdd(
         client,
         reaction,
@@ -92,47 +86,40 @@ function runBot(token) {
     if (client.user.id != message.author.id) {
       // COMMANDS =========================================================================================================
       if (message.content.startsWith(set[client.user.username].prefix)) {
-        functions.Command(
-          client, Discord,
-          message, functions, 
-          set[client.user.username].prefix,
-          set
-        );
-      } else {
+        functions.Command(client, Discord, message, functions, set);
+      } else if (
         // Dialogflow =========================================================================================================
-        if (
-          !message.content.startsWith(set[client.user.username].prefix) &&
-          client.user.id != message.author.id
-        ) {
-          
-          if (client.user.username === "Bane"){
-             if (message.mentions.has(client.user.id) ||
-             message.channel.type == "dm") {
-            functions.DialogflowIntents(client, message, functions, set);
-            } 
-          }
-          
-          else if (message.channel.type == "dm" ||
-            (message.mentions.has(client.user.id) ||
-             message.cleanContent.startsWith(client.user.username + " ") ||
-             message.cleanContent.startsWith(client.user.username.toLowerCase() + " "))
+        !message.content.startsWith(set[client.user.username].prefix) &&
+        client.user.id != message.author.id
+      ) {
+        if (client.user.username === "Bane") {
+          if (
+            message.mentions.has(client.user.id) ||
+            message.channel.type == "dm"
           ) {
-            
-            if (client.user.username === "Mel") {
-              functions.SpamStop(
-                client,
-                message,
-                userMap,
-                set[client.user.username].muteRole
-              );
-              functions.DialogflowIntents(client, message, functions, set);
-            } 
-            
-            else {
-              functions.DialogflowIntents(client, message, functions, set);
-            }
+            functions.DialogflowIntents(client, message, functions, set);
+          }
+        } else if (
+          message.channel.type == "dm" ||
+          (message.mentions.has(client.user.id) ||
+            message.cleanContent.startsWith(client.user.username + " ") ||
+            message.cleanContent.startsWith(
+              client.user.username.toLowerCase() + " "
+            ))
+        ) {
+          if (client.user.username === "Mel") {
+            functions.SpamStop(
+              client,
+              message,
+              userMap,
+              set[client.user.username].muteRole
+            );
+            functions.DialogflowIntents(client, message, functions, set);
+          } else {
+            functions.DialogflowIntents(client, message, functions, set);
           }
         }
+
         // MENTIONS =========================================================================================================
         else if (
           (message.content.toLowerCase().includes("nada") ||
