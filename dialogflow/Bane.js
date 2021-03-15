@@ -4,7 +4,7 @@ module.exports = {
     const Discord = require("discord.js");
     const functions = require("../functions.js");
     const answer = await functions.DialogflowQuery(client, message);
-    const AskBaneChannel = "776420085995929600";
+    const AskBaneChannel = "819541831086899230";
 
     const data = await functions.SpreadsheetGET(client);
 
@@ -27,7 +27,7 @@ module.exports = {
       //=========================================================================================================
       else if (
         message.channel.id == "736472663299719190" || //bot-mod
-        message.channel.id == "776420085995929600" || //ask bane
+        message.channel.id == "819541831086899230" || //ask bane
         message.channel.type == "dm"
       ) {
         if (answer.intent === "Tip") {
