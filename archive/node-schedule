@@ -1,0 +1,26 @@
+// Bot is in UTC, Week starts on Monday = 1
+
+const punna = schedule.scheduleJob(
+  { hour: 1, minute: 0, dayOfWeek: 1 },
+  function() {
+    client.channels.cache.get("515097948720463873").send(embeds["pun-na"]);
+  }
+);
+const pun_na_rem_tuesday = schedule.scheduleJob(
+  { hour: 21, minute: 0, dayOfWeek: 2 },
+  function() {
+    client.channels.cache.get("327929910264070146").send(embeds["pun-rem"]);
+  }
+);
+const pun_na_rem_thursday = schedule.scheduleJob(
+  { hour: 21, minute: 0, dayOfWeek: 4 },
+  function() {
+    client.channels.cache.get("327929910264070146").send(embeds["pun-rem"]);
+  }
+);
+const pun_na_rem_saturday = schedule.scheduleJob(
+  { hour: 14, minute: 0, dayOfWeek: 6 },
+  function() {
+    client.channels.cache.get("327929910264070146").send(embeds["pun-rem"]);
+  }
+);

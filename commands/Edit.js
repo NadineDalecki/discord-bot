@@ -1,6 +1,30 @@
-const Discord = require("discord.js");
+module.exports = {
+  name: "edit",
+  async execute(client, Discord, message, functions, args, set) {
+    message.delete().catch(_ => {});
 
-const embed = new Discord.MessageEmbed()
+    const adminRoles = set[client.user.username].adminRoles;
+    if (
+      message.member.roles.cache.some(r => adminRoles.includes(r.id)) ||
+      message.member.hasPermission("ADMINISTRATOR")
+    ) {
+      const data = await functions.SpreadsheetGET(client);
+      const sheet = data.doc.sheetsByTitle["Embeds"];
+      const rows = await sheet.getRows();
+
+      let embed = rows.filter(row => row.name == args[2]);
+      const finalEmbed = functions.EmbedBuilder(embed);
+
+      client.channels.cache
+        .get(args[0])
+        .messages.fetch(args[1])
+        .then(msg => msg.edit(Itsy))
+        .catch(console.error);
+      console.log("Updating Embed");
+    }
+    
+    
+const Itsy = new Discord.MessageEmbed()
   .setThumbnail(
     "https://uploads-ssl.webflow.com/5ed8826082212c5dc8270931/5eeb4cbc1f492bf42313c31f_vrcb%20logo%20blue%20white.png"
   )
@@ -17,24 +41,7 @@ const embed = new Discord.MessageEmbed()
 
   .addField(
     "HELPFUL LINKS",
-    "\n\u200b\n[<:twitter:744176978747326546>](<https://twitter.com/vrcommbuilders>)\u2003\u2003[<:facebook:744176978806046813>](<https://www.facebook.com/groups/vrcommunitybuilders/>)\u2003\u2003[<:website:744176979103973436>](<https://www.vrcommunitybuilders.com/>)\n\u200b\n"
+    "\n\u200b\n[<:discord:744176978810109954>](<https://discord.gg/7r9k2yM>)\u2003\u2003\n\u200b\n[<:twitter:744176978747326546>](<https://twitter.com/vrcommbuilders>)\u2003\u2003[<:facebook:744176978806046813>](<https://www.facebook.com/VRCommunityBuilders>)\u2003\u2003[<:website:744176979103973436>](<https://www.vrcommunitybuilders.com/>)\n\u200b\n"
   )
-
-  .addField(
-    "ROLES",
-    "If you identify with our values and promise to help us keeping this server a friendly and supportive place, then please react with our emoji to get full access to our server."
-  );
-
-module.exports = {
-  name: "welcome",
-  execute(client, message, args) {
-    if (client.user.username === "Itsy") {
-      message.channel
-        .send(embed)
-        .then(async msg => {
-          await msg.react("744177070162182275");
-        })
-        .catch(error => console.log(error));
-    }
   }
 };

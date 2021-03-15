@@ -1,0 +1,31 @@
+else if (SupportChannels.includes(message.channel.id) && !message.content.startsWith("@")) {
+      try {  
+      const answer = await functions.DialogflowQuery(
+        message,
+        message.cleanContent
+      );
+    if (
+        answer.intent.substring(0, 3) === "RAD" ||
+        answer.intent.substring(0, 4) === "VRML" ||
+        answer.intent.substring(0, 14) === "Command | Help"
+      ) {
+      if (answer.result[0].queryResult.intentDetectionConfidence >= 0.95) {
+        client.channels.cache
+          .get("730278014654480404")
+          .send(
+            "\n>>> **Message:** " +
+              message.content +
+              "\nIntent: " +
+              answer.intent +
+              "\nConfidence: " +
+              answer.result[0].queryResult.intentDetectionConfidence +
+              "\n" +
+              message.url
+          );
+      } 
+    }}
+    catch (error){
+        functions.Error(client, "This happened when trying to send an automated answer!")
+        functions.Error(client, error.stack)
+        
+    } }

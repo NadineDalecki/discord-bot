@@ -1,7 +1,6 @@
-// Type prefix+rl role-id to get a list of all users with that ID. Helpful since the role list in discord is not reliable.
 module.exports = {
-  name: "rl",
-  execute(client, message, args) {
+  name: "role",
+  execute(client, Discord, message, functions, args, set) {
    message.delete().catch(_ => {});
       const names = message.guild.roles.cache
         .get(args.toString())
