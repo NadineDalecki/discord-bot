@@ -36,12 +36,6 @@ function runBot(token) {
 
   client.on("error", error => functions.Error(client, error));
 
-  client.on("messageDelete", async message => {
-    if (set[client.user.username].deletedMessages == true) {
-      // functions.DeletedMessage(client, message);
-    }
-  });
-
   client.on("messageReactionAdd", async (reaction, user) => {
     if (set[client.user.username].rrRolesFunction == true) {
       functions.RoleAdd(
@@ -137,7 +131,6 @@ function runBot(token) {
         } else if (
           message.content.toLowerCase().includes("hasko") &&
           !message.author.bot &&
-          message.guild.id != "632570524463136779" &&
           message.guild.id != "387015404092129282" && //EU
           message.guild.id != "421618914166833152" && //Gravity
           message.guild.id != "707307751033798666" && //Virtex

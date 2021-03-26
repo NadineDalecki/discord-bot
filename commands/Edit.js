@@ -18,7 +18,7 @@ module.exports = {
       client.channels.cache
         .get(args[0])
         .messages.fetch(args[1])
-        .then(msg => msg.edit(Itsy))
+        .then(msg => msg.edit(finalEmbed))
         .catch(console.error);
       console.log("Updating Embed");
     }
@@ -41,7 +41,7 @@ const Itsy = new Discord.MessageEmbed()
 
   .addField(
     "HELPFUL LINKS",
-    "\n\u200b\n[<:discord:744176978810109954>](<https://discord.gg/7r9k2yM>)\u2003\u2003\n\u200b\n[<:twitter:744176978747326546>](<https://twitter.com/vrcommbuilders>)\u2003\u2003[<:facebook:744176978806046813>](<https://www.facebook.com/VRCommunityBuilders>)\u2003\u2003[<:website:744176979103973436>](<https://www.vrcommunitybuilders.com/>)\n\u200b\n"
+    "\n\u200b\n[Discord](<https://discord.gg/7r9k2yM>)\u2003\u2003[Twitter](<https://twitter.com/vrcommbuilders>)\u2003\u2003[Facebook](<https://www.facebook.com/VRCommunityBuilders>)\u2003\u2003[Website](<https://www.vrcommunitybuilders.com/>)\n\u200b\n"
   )
   }
-};
+}

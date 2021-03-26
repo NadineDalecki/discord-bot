@@ -30,11 +30,27 @@ module.exports = {
         message.channel.id == "819541831086899230" || //ask bane
         message.channel.type == "dm"
       ) {
+        console.log("dm");
         if (answer.intent === "Tip") {
           const sheet = data.doc.sheetsByTitle["Tips"];
           const rows = await sheet.getRows();
           const randomTip = rows[Math.floor(Math.random() * rows.length)].tip;
           message.reply("💡 " + randomTip);
+        }
+        if (answer.intent === "Meme") {
+          const sheet = data.doc.sheetsByTitle["Memes"];
+          const rows = await sheet.getRows();
+
+          const data2 = rows[Math.floor(Math.random() * rows.length)].meme;
+
+          message.reply(data2);
+        }
+        if (answer.intent === "Fun Fact") {
+          const sheet = data.doc.sheetsByTitle["Fun Facts"];
+          const rows = await sheet.getRows();
+          const data3 = rows[Math.floor(Math.random() * rows.length)].fact;
+
+          message.reply("🤣 " + data3);
         }
         //=========================================================================================================
         else if (answer.intent === "Locations") {
@@ -100,12 +116,32 @@ module.exports = {
         }
       } else {
         if (answer.intent === "Tip") {
-          const sheet = data.doc.sheetsByByTitle["Tips"];
+          const sheet = data.doc.sheetsByTitle["Tips"];
           const rows = await sheet.getRows();
-          const randomTip = rows[Math.floor(Math.random() * rows.length)].tip;
+          const data = rows[Math.floor(Math.random() * rows.length)].tip;
           client.channels.cache
             .get(AskBaneChannel)
-            .send(`${message.author}` + "💡 " + randomTip);
+            .send(`${message.author}` + "💡 " + data);
+        }
+        //=========================================================================================================
+        if (answer.intent === "Meme") {
+          const sheet = data.doc.sheetsByTitle["Memes"];
+          const rows = await sheet.getRows();
+          const data2 = rows[Math.floor(Math.random() * rows.length)].meme;
+
+          client.channels.cache.get(AskBaneChannel).send(`${message.author}`);
+
+          client.channels.cache.get(AskBaneChannel).send(data2);
+        }
+        //=========================================================================================================
+        if (answer.intent === "Fun Fact") {
+          const sheet = data.doc.sheetsByTitle["Fun Facts"];
+          const rows = await sheet.getRows();
+          const data3 = rows[Math.floor(Math.random() * rows.length)].fact;
+
+          client.channels.cache
+            .get(AskBaneChannel)
+            .send(`${message.author}` + "🤣 " + data3);
         }
         //=========================================================================================================
         else if (answer.intent === "Locations") {
