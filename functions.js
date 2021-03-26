@@ -43,39 +43,7 @@ module.exports = {
       console.error(error);
     }
   },
-  DeletedMessage: async function(client, message) {
-    const entry = await message.guild
-      .fetchAuditLogs({ type: "MESSAGE_DELETE" })
-      .then(audit => audit.entries.first());
-    let user = "";
-    try {
-      if (
-        entry.extra.channel.id === message.channel.id &&
-        entry.target.id === message.author.id &&
-        entry.createdTimestamp > Date.now() - 5000 &&
-        entry.extra.count >= 1
-      ) {
-        user = entry.executor.username;
-      } else {
-        user = message.author.username;
-      }
-
-      const embed = new Discord.MessageEmbed()
-        .setColor("#c20000")
-        .setAuthor(
-          `${user} deleted a message from ${message.author.username} in #${message.channel.name}`,
-          user.displayAvatarURL
-        )
-        .setDescription(`${message.content}`);
-
-      client.channels.cache
-        .get(set[client.user.username].logChannel)
-        .send(embed);
-    } catch (error) {
-      console.log(error);
-    }
-  },
-  DialogflowQuery: async function(client, message) {
+   DialogflowQuery: async function(client, message) {
     const config = {
       credentials: {
         private_key: process.env[`PRIVATE_KEY_${client.user.username.toUpperCase()}`].replace(/\\n/g, "\n"),
