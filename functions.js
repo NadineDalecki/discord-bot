@@ -151,6 +151,8 @@ module.exports = {
     client.users.cache.get(id).send(embed);
   },
   RoleAdd: async function(client, reaction, user, id) {
+      console.log(client.user.username)
+      console.log(reaction.message.content)
     if (reaction.partial) {
       try {
         await reaction.fetch();

@@ -18,10 +18,10 @@ const set = require("./settings.json");
 const userMap = new Map();
 const functions = require("./functions.js");
 const Discord = require("discord.js");
+var giphy = require('giphy-api')(process.env.GIPHY);
+const schedule = require("node-schedule");
 
-process.on("error", error => console.log(error));
-process.on("uncaughtException", error => console.log(error));
-process.on("unhandledRejection", error => console.log(error));
+
 
 // FOR EACH =========================================================================================================
 BotTokens.forEach(runBot);
@@ -34,8 +34,27 @@ function runBot(token) {
     }
   });
 
-  client.on("error", error => functions.Error(client, error));
+client.on("error", error => functions.Error(client, error));
 
+process.on("error", error => console.log(error));
+process.on("uncaughtException", error => console.log(error));
+process.on("unhandledRejection", error => console.log(error));
+// GIF =========================================================================================================
+  const rule = new schedule.RecurrenceRule();
+  rule.hour = 18
+  rule.minute = 01
+
+  const job = schedule.scheduleJob(rule, async function() {
+    if (client.user.username === "TG Bot")
+    giphy.trending({
+    limit: 1,
+    rating: 'g',
+    fmt: 'json'
+}, function (err, res) {
+client.channels.cache.get("563382017505361940").send(res.data[0].url)
+});
+  })
+// GIF END ========================================================================================================= 
   client.on("messageReactionAdd", async (reaction, user) => {
     if (set[client.user.username].rrRolesFunction == true) {
       functions.RoleAdd(
@@ -93,7 +112,15 @@ function runBot(token) {
           ) {
             functions.DialogflowIntents(client, message, functions, set);
           }
-        } else if (
+        }  else if (client.user.username === "Affen") {
+          if (
+            message.content.toLowerCase().includes("affen") ||
+            message.mentions.has(client.user.id) ||
+            message.channel.type == "dm"
+          ) {
+            functions.DialogflowIntents(client, message, functions, set);
+          }
+        }else if (
           message.channel.type == "dm" ||
           (message.mentions.has(client.user.id) ||
             message.cleanContent.startsWith(client.user.username + " ") ||

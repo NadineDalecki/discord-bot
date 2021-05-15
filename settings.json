@@ -1,210 +1,226 @@
 {
-  "Affen": {
-    "guildId": "387015404092129282",
-    "prefix": "?",
-    "adminRoles": ["473863737254871060", "425225020382642176"],
-    "logChannel": "718176504437276682",
-    "deletedMessages": false,
-    "status": "dnd",
-    "activity": {
-      "name": "shit talking",
-      "type": "COMPETING",
-      "url": "https://discord.com"
+    "Affen": {
+        "guildId": "387015404092129282",
+        "prefix": "?",
+        "adminRoles": [
+            "473863737254871060",
+            "425225020382642176"
+        ],
+        "logChannel": "718176504437276682",
+        "deletedMessages": false,
+        "status": "dnd",
+        "activity": {
+            "name": "shit talking",
+            "type": "COMPETING",
+            "url": "https://discord.com"
+        },
+        "JoinDM": true,
+        "JoinDMText": "**Welcome to Echo Arena EU Teams! **The place to make a team, play other teams and generally advance the EU Echo Arena scene with the ultimate goal of defeating NA teams in tournaments. This is a *closed-off private space from NA players*, so don’t mention this server or talk about its contents. Keep discussions civil, don’t overly post memes or general pointless chatter. **Be respectful**, but as this is a competitive server some drama/salt/banter is expected between teams and players.\n\n**MIXED SCRIMS**\n\nMixed scrims are fun games with random players, kind of like public matches but with the same group playing each other in a private match. A mixed scrim group will keep playing for as long as they feel like it (often 1-2 hours), with players dropping out and new players joining in.\n\n**Don’t join a mixed scrim unless you can play for at least 30 minutes, don’t ask for a mixed scrim unless you can play for about an hour.**\n\nOther than that, it’s first come first served. If you want to be alerted of these mixed scrims, join the @Scrimmer role by typing: `Affen scrimmer`\n\u200b\n**TEAM SCRIMS**\n\nTeam scrims are “practice dates” where two existing teams can train against each other, usually for a duration of 1-2 hours. If you are in a team you can tag the @Teams role and ask for a specific day or time, for example: @Teams scrims 7-9 SUK (UK Time)? If  you want to play, answer and set it up in the chat. Avoid private messaging responses if possible so others know that the spot is taken.\n\n**Don’t ask for a team scrim unless you have made sure your team can actually accept it and play for at least an hour.**\n\n**Looking for teams role**: If you are looking for teams to join, assign yourself the @looking for team role by typing: `Affen looking for team`",
+        "rrScheduler": true,
+        "rrRolesFunction": false,
+        "rrMessageId": "",
+        "roles": {
+            "lft": "549925842646597651",
+            "Scrimmer": "509787093208399872",
+            "Climbey": "428612225134231552"
+        },
+        "muteRole": "444875478390800406"
     },
-    "JoinDM": true,
-    "JoinDMText": "**Welcome to Echo Arena EU Teams! **The place to make a team, play other teams and generally advance the EU Echo Arena scene with the ultimate goal of defeating NA teams in tournaments. This is a *closed-off private space from NA players*, so don’t mention this server or talk about its contents. Keep discussions civil, don’t overly post memes or general pointless chatter. **Be respectful**, but as this is a competitive server some drama/salt/banter is expected between teams and players.\n\n**MIXED SCRIMS**\n\nMixed scrims are fun games with random players, kind of like public matches but with the same group playing each other in a private match. A mixed scrim group will keep playing for as long as they feel like it (often 1-2 hours), with players dropping out and new players joining in.\n\n**Don’t join a mixed scrim unless you can play for at least 30 minutes, don’t ask for a mixed scrim unless you can play for about an hour.**\n\nOther than that, it’s first come first served. If you want to be alerted of these mixed scrims, join the @Scrimmer role by typing: `Affen scrimmer`\n\u200b\n**TEAM SCRIMS**\n\nTeam scrims are “practice dates” where two existing teams can train against each other, usually for a duration of 1-2 hours. If you are in a team you can tag the @Teams role and ask for a specific day or time, for example: @Teams scrims 7-9 SUK (UK Time)? If  you want to play, answer and set it up in the chat. Avoid private messaging responses if possible so others know that the spot is taken.\n\n**Don’t ask for a team scrim unless you have made sure your team can actually accept it and play for at least an hour.**\n\n**Looking for teams role**: If you are looking for teams to join, assign yourself the @looking for team role by typing: `Affen looking for team`",
-    "rrScheduler": true,
-    "rrRolesFunction": false,
-    "rrMessageId": "",
-    "roles": {
-      "lft": "549925842646597651",
-      "Scrimmer": "509787093208399872",
-      "Climbey": "428612225134231552"
+    "Mel": {
+        "spreadsheetID": "1b-2t41LO_U5j8gJfxPS_rdg4Y8kINwMgSqUKpNdf4RE",
+        "guildId": "326412222119149578",
+        "prefix": "?",
+        "adminRoles": [
+            "151759779016998913",
+            "702591687096270848",
+            "425225020382642176"
+        ],
+        "logChannel": "718176504437276682",
+        "deletedMessages": false,
+        "status": "online",
+        "activity": {
+            "name": "to your questions ❓",
+            "type": "LISTENING",
+            "url": "https://www.twitch.tv/echoarena_vrml"
+        },
+        "rrRolesFunction": false,
+        "rrMessageId": "",
+        "roles": {},
+        "muteRole": "748631446217818123"
     },
-    "muteRole": "444875478390800406"
-  },
-
-  "Mel": {
-    "spreadsheetID": "1b-2t41LO_U5j8gJfxPS_rdg4Y8kINwMgSqUKpNdf4RE",
-    "guildId": "326412222119149578",
-    "prefix": "?",
-    "adminRoles": [
-      "151759779016998913", "702591687096270848", "425225020382642176"
-    ],
-    "logChannel": "718176504437276682",
-    "deletedMessages": false,
-    "status": "online",
-    "activity": {
-      "name": "to your questions ❓",
-      "type": "LISTENING",
-      "url": "https://www.twitch.tv/echoarena_vrml"
+    "Bane": {
+        "spreadsheetID": "1EUd3czTty60S7WhFn9Y5leOtH0lOu2LhLEvkQ62eE50",
+        "guildId": "428667403950620679",
+        "prefix": "?",
+        "adminRoles": [
+            "449000869413912586",
+            "717548073852731462",
+            "425225020382642176"
+        ],
+        "logChannel": "718176504437276682",
+        "deletedMessages": false,
+        "status": "idle",
+        "activity": {
+            "name": "POPULATION:ONE",
+            "type": "COMPETING",
+            "url": "https://discord.com"
+        },
+        "rrRolesFunction": false,
+        "rrMessageId": "",
+        "roles": {},
+        "muteRole": ""
     },
-    "rrRolesFunction": false,
-    "rrMessageId": "",
-    "roles": {},
-    "muteRole": "748631446217818123"
-  },
-  "Bane": {
-    "spreadsheetID": "1EUd3czTty60S7WhFn9Y5leOtH0lOu2LhLEvkQ62eE50",
-    "guildId": "428667403950620679",
-    "prefix": "?",
-    "adminRoles": ["449000869413912586", "717548073852731462", "425225020382642176"],
-    "logChannel": "718176504437276682",
-    "deletedMessages": false,
-    "status": "idle",
-    "activity": {
-      "name": "POPULATION:ONE",
-      "type": "COMPETING",
-      "url": "https://discord.com"
+    "Itsy": {
+        "spreadsheetID": "1WwEw74tAaqXjza58SDB2E42aWOLuehxYvJ-8eBrSv6U",
+        "guildId": "610545116494430234",
+        "prefix": "=",
+        "adminRoles": [
+            "677015339120328704",
+            "425225020382642176"
+        ],
+        "df": "./dialogflow/itsy.js",
+        "logChannel": "744152267912904735",
+        "deletedMessages": false,
+        "status": "online",
+        "activity": {
+            "name": "to your ideas 💡",
+            "type": "LISTENING",
+            "url": "https://www.twitch.tv/"
+        },
+        "rrRolesFunction": false
     },
-    "rrRolesFunction": false,
-    "rrMessageId": "",
-    "roles": {},
-    "muteRole": ""
-  },
-  "Itsy": {
-    "spreadsheetID": "1WwEw74tAaqXjza58SDB2E42aWOLuehxYvJ-8eBrSv6U",
-    "guildId": "610545116494430234",
-    "prefix": "=",
-    "adminRoles": ["677015339120328704", "425225020382642176"], 
-    "df": "./dialogflow/itsy.js",
-    "logChannel": "744152267912904735",
-    "deletedMessages": false,
-    "status": "online",
-    "activity": {
-      "name": "to your ideas 💡",
-      "type": "LISTENING",
-      "url": "https://www.twitch.tv/"
+    "VRL": {
+        "guildId": "439427299675209729",
+        "prefix": "?",
+        "adminRoles": [
+            "447791613926834176"
+        ],
+        "logChannel": "566294428453699584",
+        "guildLogs": true,
+        "deletedMessages": true,
+        "status": "dnd",
+        "activity": {
+            "name": "for a new job 😔",
+            "type": "WATCHING",
+            "url": "https://www.twitch.tv/vrchallenger"
+        },
+        "roles": {
+            "lft": "549925842646597651",
+            "Scrimmer": "509787093208399872",
+            "Climbey": "428612225134231552"
+        },
+        "rrRolesFunction": false,
+        "rrMessageId": "679385800412233736",
+        "rrRoles": {
+            "551077554543394827": {
+                "name": "Echo Arena",
+                "role": "446981661368909824"
+            },
+            "551077555218939904": {
+                "name": "Echo Combat",
+                "role": "551080412508848138"
+            },
+            "551077662798643200": {
+                "name": "Space Junkies",
+                "role": "551080564241989656"
+            },
+            "679384856551227392": {
+                "name": "Pistol Whip",
+                "role": "679365090226601994"
+            },
+            "551077555487244289": {
+                "name": "Onward",
+                "role": "462242156090753059"
+            },
+            "716705176236326923": {
+                "name": "EU",
+                "role": "446982022368329728"
+            },
+            "519923682001289217": {
+                "name": "NA",
+                "role": "446982026046865409"
+            }
+        },
+        "muteRole": ""
     },
-    "rrRolesFunction": false
-  
-  },
-  "VRL": {
-    "guildId": "439427299675209729",
-    "prefix": "?",
-    "adminRoles": ["447791613926834176"],
-    "logChannel": "566294428453699584",
-    "guildLogs": true,
-    "deletedMessages": true,
-    "status": "dnd",
-    "activity": {
-      "name": "VR League Twitch 👀",
-      "type": "STREAMING",
-      "url": "https://www.twitch.tv/vrchallenger"
+    "KVN": {
+        "guildId": "707307751033798666",
+        "prefix": "!",
+        "adminRoles": [
+            "724966816056606780",
+            "763833830233866291"
+        ],
+        "logChannel": "718176504437276682",
+        "deletedMessages": false,
+        "status": "online",
+        "activity": {
+            "name": "the alpha testers",
+            "type": "WATCHING",
+            "url": "https://www.twitch.tv/"
+        },
+        "rrRolesFunction": true,
+        "rrAuto": "724966510614937622",
+        "rrMessageId": "742300225133346896",
+        "rrRoles": {
+            "725396079289303050": {
+                "name": "EU",
+                "role": "725059685417484430"
+            },
+            "725336757133901924": {
+                "name": "NA",
+                "role": "725059639397580823"
+            },
+            "725396078832123958": {
+                "name": "Asia",
+                "role": "725059833107054602"
+            }
+        },
+        "muteRole": ""
     },
-    "roles": {
-      "lft": "549925842646597651",
-      "Scrimmer": "509787093208399872",
-      "Climbey": "428612225134231552"
-    },
-    "rrRolesFunction": true,
-    "rrMessageId": "679385800412233736",
-    "rrRoles": {
-      "551077554543394827": {
-        "name": "Echo Arena",
-        "role": "446981661368909824"
-      },
-      "551077555218939904": {
-        "name": "Echo Combat",
-        "role": "551080412508848138"
-      },
-      "551077662798643200": {
-        "name": "Space Junkies",
-        "role": "551080564241989656"
-      },
-      "679384856551227392": {
-        "name": "Pistol Whip",
-        "role": "679365090226601994"
-      },
-      "551077555487244289": {
-        "name": "Onward",
-        "role": "462242156090753059"
-      },
-      "716705176236326923": {
-        "name": "EU",
-        "role": "446982022368329728"
-      },
-      "519923682001289217": {
-        "name": "NA",
-        "role": "446982026046865409"
-      }
-    },
-    "muteRole": ""
-  },
-
-  "KVN": {
-    "guildId": "707307751033798666",
-    "prefix": "!",
-    "adminRoles": ["724966816056606780", "763833830233866291"],
-    "logChannel": "718176504437276682",
-    "deletedMessages": false,
-    "status": "online",
-    "activity": {
-      "name": "the alpha testers",
-      "type": "WATCHING",
-      "url": "https://www.twitch.tv/"
-    },
-    "rrRolesFunction": true,
-    "rrAuto": "724966510614937622",
-    "rrMessageId": "742300225133346896",
-    "rrRoles": {
-      "725396079289303050": {
-        "name": "EU",
-        "role": "725059685417484430"
-      },
-      "725336757133901924": {
-        "name": "NA",
-        "role": "725059639397580823"
-      },
-      "725396078832123958": {
-        "name": "Asia",
-        "role": "725059833107054602"
-      }
-    },
-    "muteRole": ""
-  },
-
-  "TG Bot": {
-    "guildId": "421618914166833152",
-    "prefix": "!",
-    "adminRoles": ["647068080908009472", "421641048155226113"],
-    "logChannel": "718176504437276682",
-    "deletedMessages": false,
-    "status": "online",
-    "activity": {
-      "name": "in Zero Gravity",
-      "type": "COMPETING",
-      "url": "https://www.twitch.tv/"
-    },
-    "rrRolesFunction": true,
-    "rrAuto": "651255027469516801",
-    "rrMessageId": "749599176853028884",
-    "rrRoles": {
-      "748466627942809710": {
-        "name": "Echo Arena",
-        "role": "748518111086379029"
-      },
-      "748466627854729276": {
-        "name": "Echo Combat",
-        "role": "748518167105634368"
-      },
-      "748467374105165826": {
-        "name": "Tower Tag",
-        "role": "748518189868122142"
-      },
-      "748466702244642926": {
-        "name": "Beat Saber",
-        "role": "748518215520485407"
-      },
-      "748466627527442473": {
-        "name": "Pistol Whip",
-        "role": "748518241911177307"
-      },
-      "744481770296311848": {
-        "name": "Gravity",
-        "role": "651255027469516801"
-      }
-    },
-    "muteRole": ""
-  }
+    "TG Bot": {
+        "guildId": "421618914166833152",
+        "prefix": "!",
+        "adminRoles": [
+            "647068080908009472",
+            "421641048155226113"
+        ],
+        "logChannel": "718176504437276682",
+        "deletedMessages": false,
+        "status": "online",
+        "activity": {
+            "name": "in Zero Gravity",
+            "type": "COMPETING",
+            "url": "https://www.twitch.tv/"
+        },
+        "rrRolesFunction": true,
+        "rrAuto": "651255027469516801",
+        "rrMessageId": "749599176853028884",
+        "rrRoles": {
+            "748466627942809710": {
+                "name": "Echo Arena",
+                "role": "748518111086379029"
+            },
+            "748466627854729276": {
+                "name": "Echo Combat",
+                "role": "748518167105634368"
+            },
+            "748467374105165826": {
+                "name": "Tower Tag",
+                "role": "748518189868122142"
+            },
+            "748466702244642926": {
+                "name": "Beat Saber",
+                "role": "748518215520485407"
+            },
+            "748466627527442473": {
+                "name": "Pistol Whip",
+                "role": "748518241911177307"
+            },
+            "744481770296311848": {
+                "name": "Gravity",
+                "role": "651255027469516801"
+            }
+        },
+        "muteRole": ""
+    }
 }
