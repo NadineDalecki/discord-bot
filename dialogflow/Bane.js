@@ -30,7 +30,6 @@ module.exports = {
         message.channel.id == "819541831086899230" || //ask bane
         message.channel.type == "dm"
       ) {
-        console.log("dm");
         if (answer.intent === "Tip") {
           const sheet = data.doc.sheetsByTitle["Tips"];
           const rows = await sheet.getRows();

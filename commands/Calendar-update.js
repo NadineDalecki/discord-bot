@@ -10,10 +10,10 @@ module.exports = {
       const newEmbed = new Discord.MessageEmbed()
         .setColor("#d6113c")
         .setTitle("Community News")
-        .setFooter(
-          "You would like your event or training to be announced in this channel too? DM @Hasko7#4977 by Thursday evening!",
-          "https://cdn.discordapp.com/avatars/335528823615651842/5473cbdcf0977062c5a0324a72362a5b.png?size=256"
-        );
+          .setFooter(
+            "Would you like to be involved with Echo events and training? DM @Hasko7#4977. For feedback about our community groups, trainers, or events, please let us know via this form https://forms.gle/a2BCsJNuva6rH9mJ7",  "https://cdn.discordapp.com/avatars/335528823615651842/5473cbdcf0977062c5a0324a72362a5b.png?size=256"
+          );
+
 
       const data = await functions.SpreadsheetGET(client);
       const sheet = data.doc.sheetsByTitle["Calendar"];

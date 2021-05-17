@@ -18,7 +18,9 @@ module.exports = {
 
     if (!client.dialogues.has(client.user.username)) return;
     try {
-      client.dialogues.get(client.user.username).execute(client, message, functions, set);
+      client.dialogues
+        .get(client.user.username)
+        .execute(client, message, functions, set);
     } catch (error) {
       console.error(error);
     }
@@ -32,22 +34,29 @@ module.exports = {
       const command = require(`./commands/${file}`);
       client.commands.set(command.name, command);
     }
-    const args = message.content.slice(set[client.user.username].prefix.length).split(/ +/);
+    const args = message.content
+      .slice(set[client.user.username].prefix.length)
+      .split(/ +/);
     const command = args.shift().toLowerCase();
     if (!client.commands.has(command)) return;
     try {
       if (command !== "") {
-        client.commands.get(command).execute(client, Discord, message, functions, args, set);
+        client.commands
+          .get(command)
+          .execute(client, Discord, message, functions, args, set);
       }
     } catch (error) {
       console.error(error);
     }
   },
-   DialogflowQuery: async function(client, message) {
+  DialogflowQuery: async function(client, message) {
     const config = {
       credentials: {
-        private_key: process.env[`PRIVATE_KEY_${client.user.username.toUpperCase()}`].replace(/\\n/g, "\n"),
-        client_email: process.env[`CLIENT_EMAIL_${client.user.username.toUpperCase()}`]
+        private_key: process.env[
+          `PRIVATE_KEY_${client.user.username.toUpperCase()}`
+        ].replace(/\\n/g, "\n"),
+        client_email:
+          process.env[`CLIENT_EMAIL_${client.user.username.toUpperCase()}`]
       }
     };
     const sessionClient = new dialogflow.SessionsClient(config);
@@ -151,6 +160,9 @@ module.exports = {
     client.users.cache.get(id).send(embed);
   },
   RoleAdd: async function(client, reaction, user, id) {
+    console.log(client.user.username);
+    console.log(reaction.message.content);
+    console.log(reaction.message.channel.id);
     if (reaction.partial) {
       try {
         await reaction.fetch();
@@ -266,7 +278,8 @@ module.exports = {
   SpreadsheetPOST: async function(client, tab, rowData) {
     const doc = new GoogleSpreadsheet(set[client.user.username].spreadsheetID);
     await doc.useServiceAccountAuth({
-      client_email: process.env[`CLIENT_EMAIL_${client.user.username.toUpperCase()}`],
+      client_email:
+        process.env[`CLIENT_EMAIL_${client.user.username.toUpperCase()}`],
       private_key: process.env[
         `PRIVATE_KEY_${client.user.username.toUpperCase()}`
       ].replace(/\\n/g, "\n")
