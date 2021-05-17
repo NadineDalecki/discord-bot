@@ -192,7 +192,9 @@
             "type": "COMPETING",
             "url": "https://www.twitch.tv/"
         },
-        "rrRolesFunction": true,
+
+        "rrRolesFunction": false,
+
         "rrAuto": "651255027469516801",
         "rrMessageId": "749599176853028884",
         "rrRoles": {

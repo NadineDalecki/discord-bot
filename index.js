@@ -41,8 +41,9 @@ process.on("uncaughtException", error => console.log(error));
 process.on("unhandledRejection", error => console.log(error));
 // GIF =========================================================================================================
   const rule = new schedule.RecurrenceRule();
-  rule.hour = 18
-  rule.minute = 01
+  rule.hour = 20
+  rule.minute = 1
+
 
   const job = schedule.scheduleJob(rule, async function() {
     if (client.user.username === "TG Bot")
