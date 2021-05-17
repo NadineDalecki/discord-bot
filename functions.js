@@ -163,6 +163,7 @@ module.exports = {
     console.log(client.user.username);
     console.log(reaction.message.content);
     console.log(reaction.message.channel.id);
+
     if (reaction.partial) {
       try {
         await reaction.fetch();

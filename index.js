@@ -44,6 +44,7 @@ process.on("unhandledRejection", error => console.log(error));
   rule.hour = 20
   rule.minute = 1
 
+
   const job = schedule.scheduleJob(rule, async function() {
     if (client.user.username === "TG Bot")
     giphy.trending({
